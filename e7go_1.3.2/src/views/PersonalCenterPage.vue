@@ -14,7 +14,7 @@
                     <dd><router-link class="pc-cell" to="../personal_center/order">我的订单</router-link></dd>
                     <dd><router-link class="pc-cell" to="">退换/售后</router-link></dd>
                     <dd><router-link class="pc-cell" to="">发票信息</router-link></dd>
-                    <dd><router-link class="pc-cell" to="">收货地址</router-link></dd>
+                    <dd><router-link class="pc-cell" to="../personal_center/address">收货地址</router-link></dd>
                 </dl>
             </aside>
             <div class="pc-container">
@@ -59,7 +59,7 @@ const  PersonalCenterGrid = styled.div`
             }
         }
         .pc-container{
-            ${styleFn.flexauto};
+            ${styleFn.flex1};
         }
     }
 `

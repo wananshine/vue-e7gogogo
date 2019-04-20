@@ -84,6 +84,10 @@ const routes = [
         {
           path:'/personal_center/order',
           component: () => import(/* webpackChunkName: "about" */ '@/components/personalCenter/OrderPanelPage.vue'),
+        },
+        {
+          path:'/personal_center/address',
+          component: () => import(/* webpackChunkName: "about" */ '@/components/personalCenter/AddressListPage.vue'),
         }
       ]
     }
