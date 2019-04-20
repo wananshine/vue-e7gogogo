@@ -1,0 +1,39 @@
+query getSkus($filter: SkuFilterInput!) {
+    skus(filter: $filter) {
+        count
+        items {
+            id
+            name
+            dateCreated
+            lastUpdated
+            unitPrice
+            marketUnitPrice
+            businessUnitPrice
+            employeeUnitPrice
+            status
+            availableInventoryAmount
+            safeInventoryAmount
+            buyerSkuSafeInventoryAmount
+            displayInventoryAmount
+            supplierDisplayInventoryAmount
+            supplierAvailableInventoryAmount
+            skuCode
+            unitPriceGrossProfitRate
+            employeeUnitPriceGrossProfitRate
+            businessUnitPriceGrossProfitRate
+            modelNumber
+            optionValues{
+            id
+            name
+            }
+            product {
+            id
+            minOrderQuantity
+            brand{
+                id
+                name
+            }
+            }
+        }
+    }
+}
