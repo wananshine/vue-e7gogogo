@@ -1,19 +1,7 @@
-
 <template>
-  <CollectionGrid>
-      <CollectionInner>
-        <GoodsItem v-for="(c, cidx) in collectionData.list" :key="cidx">
-            <div class="coll-img">
-                <img src="//img11.360buyimg.com/n2/jfs/t7447/318/2567254277/105570/2717105a/59b1092aNbe8c39ab.jpg">
-                <!--<img :scr="c.imageUrl" />-->
-            </div>
-            <div class="coll-info">
-                <p class="coll-price">{{c.actualCurrentPrice}}</p>
-                <p class="coll-title">{{c.title}}</p>
-            </div>
-        </GoodsItem>
-      </CollectionInner>
-  </CollectionGrid>
+  <NewsGrid>
+      news
+  </NewsGrid>
 </template>
 <style lang="less" scoped="true">
 </style>
@@ -21,62 +9,25 @@
 /***********************************************************/
  
 import styled from 'vue-styled-components';
-import { styleFn } from "../../assets/js/stylebase"
-import { KaoLaGetRecommendGoods } from "../../assets/json/cartBuy"
+import { postJSON, getJSON } from '@/api/api1'
+import { journalismApi } from '@/api/api2'
 
 /***********************************************************/
-const CollectionGrid = styled.div`
-    width: auto;
+const NewsGrid = styled.div`
+    width: 1200px;
     margin: auto;
     position: relative;
     overflow: hidden;
 `
-const CollectionInner = styled.div`
-    position: relative;
-    overflow: hidden;
-    width: 1100px;
-`
-const GoodsItem = styled.div`
-    float: left;
-    width: 245px;
-    margin-right: 30px;
-    box-sizing: border-box;
-    border: 1px solid #eee;
-    .coll-img{
-        width: 150px;
-        height: 150px;
-        margin: 20px auto;
-        img{ 
-            width: 100%; 
-            height: 150px;
-        }
-    }
-    .coll-info{
-        margin-bottom: 10px;
-        padding: 0px 20px;
-    }
-    .coll-price{
-        line-height: 20px;
-        text-align: center;
-    }
-    .coll-title{
-        overflow: hidden;
-        font-size: 12px;
-        line-height: 20px;
-        ${styleFn.ellipsis};
-    }
-`
 /***********************************************************/
 export default {
     components: {   
-      CollectionGrid,
-      CollectionInner,
-      GoodsItem
+      NewsGrid,
     },
     name: "",
     data() {
         return {
-            collectionData: KaoLaGetRecommendGoods
+            brandList: [] 
         }
     },
     computed: {},
@@ -97,8 +48,11 @@ export default {
     },
     beforeCreate() {},
     created() {
-        console.log(KaoLaGetRecommendGoods, this.collectionData);
-        this.$set(this.$data, "collectionData", KaoLaGetRecommendGoods);
+        journalismApi().then((response)=>{
+            console.log(response)
+        }).catch((error)=>{
+            console.log(error)
+        })
         this.$nextTick(()=>{
             
         })

@@ -1,97 +1,105 @@
 <template>
   <CartGrid>
-      <Thead>
-        <div class="tb-row">
-            <ul class="tb-caption">
-                <li><el-checkbox @change="checkAllSkuCustomer($event)" v-model="allskuChecked"></el-checkbox>全選</li>
-                <li>商品信息</li>
-                <li></li>
-                <li></li>
-                <li>單價</li>
-                <li>數量</li>
-                <li>金額</li>
-                <li>操作</li>
-            </ul>
-        </div>
-      </Thead>
-      <Tbody>
-        <div class="tb-row" v-for="(sku, idx) in cartList" :key="idx">
-            <ul :class="['tb-sku',sku.isBuy===true?'tb-y':'']" :ref="'sku_'+idx">
-                <li class="sku-radio">
-                    <el-checkbox @change="singleCheckedCustomer($event, sku)" v-model="sku.isBuy"></el-checkbox>
-                </li>
-                <li class="sku-img">
-                    <img :src="sku.img">
-                </li>
-                <li class="sku-name">
-                    <p class="sku-title" @click="linkCustomer($event)" :title="sku.title">{{sku.title}}</p>
-                    <em>444</em>
-                    <div><b>5</b></div>
-                </li>
-                <li class="sku-attribute" @click="amendAttributeCustomer($event)">
-                    <p class="sku-line">颜色: {{sku.attr.color}}</p>
-                    <p class="sku-line">尺码: {{sku.attr.size}}</p>
-                </li>
-                <li class="sku-price">
-                    <del class="sku-discount-price">${{sku.oldprice}}</del>
-                    <i class="sku-after-price">${{sku.newprice}}</i>
-                </li>
-                <li class="sku-amount">
-                    <div>
-                        <span class="sku-minus" @click="skuMinusCustomer($event, sku)">-</span>
-                        <input @input="skuInputCustomer($event, sku)" v-model="sku.amount"  />
-                        <span class="sku-plus" @click="skuPlusCustomer($event, sku)">+</span>
-                    </div>
-                    <div class="sku-limit" v-if="![null, '', undefined].includes(sku.limit)">限购{{sku.limit}}件</div>
-                </li>
-                <li class="sku-total-price">
-                    <i>${{(sku.newprice * sku.amount).toFixed(2)}}</i>
-                </li>
-                <li class="sku-editor">
-                    <p class="sku-favorites" @click="skuFavoritesCustomer($event)">移入收藏夹</p>
-                    <p class="sku-delete" @click="skuDeleteCustomer($event)">删除</p>
-                </li>
-            </ul>
-        </div>
-      </Tbody>
-      <Tfoot>
-        <div>總價：{{selectedTotalPrice}}</div>
-      </Tfoot>
+      <section>
+        <Thead>
+            <div class="tb-row">
+                <ul class="tb-caption">
+                    <li><el-checkbox @change="checkAllSkuCustomer($event)" v-model="allskuChecked"></el-checkbox>全選</li>
+                    <li>商品信息</li>
+                    <li></li>
+                    <li></li>
+                    <li>單價</li>
+                    <li>數量</li>
+                    <li>金額</li>
+                    <li>操作</li>
+                </ul>
+            </div>
+        </Thead>
+        <Tbody>
+            <div class="tb-row" v-for="(sku, idx) in cartList" :key="idx">
+                <ul :class="['tb-sku',sku.isBuy===true?'tb-y':'']" :ref="'sku_'+idx">
+                    <li class="sku-radio">
+                        <el-checkbox @change="singleCheckedCustomer($event, sku)" v-model="sku.isBuy"></el-checkbox>
+                    </li>
+                    <li class="sku-img">
+                        <img :src="sku.img">
+                    </li>
+                    <li class="sku-name">
+                        <p class="sku-title" @click="linkCustomer($event)" :title="sku.title">{{sku.title}}</p>
+                        <em>444</em>
+                        <div><b>5</b></div>
+                    </li>
+                    <li class="sku-attribute" @click="amendAttributeCustomer($event)">
+                        <p class="sku-line">颜色: {{sku.attr.color}}</p>
+                        <p class="sku-line">尺码: {{sku.attr.size}}</p>
+                    </li>
+                    <li class="sku-price">
+                        <del class="sku-discount-price">${{sku.oldprice}}</del>
+                        <i class="sku-after-price">${{sku.newprice}}</i>
+                    </li>
+                    <li class="sku-amount">
+                        <div>
+                            <span class="sku-minus" @click="skuMinusCustomer($event, sku)">-</span>
+                            <input @input="skuInputCustomer($event, sku)" v-model="sku.amount"  />
+                            <span class="sku-plus" @click="skuPlusCustomer($event, sku)">+</span>
+                        </div>
+                        <div class="sku-limit" v-if="![null, '', undefined].includes(sku.limit)">限购{{sku.limit}}件</div>
+                    </li>
+                    <li class="sku-total-price">
+                        <i>${{(sku.newprice * sku.amount).toFixed(2)}}</i>
+                    </li>
+                    <li class="sku-editor">
+                        <p class="sku-favorites" @click="skuFavoritesCustomer($event)">移入收藏夹</p>
+                        <p class="sku-delete" @click="skuDeleteCustomer($event)">删除</p>
+                    </li>
+                </ul>
+            </div>
+        </Tbody>
+        <Tfoot>
+            <div>總價：{{selectedTotalPrice}}</div>
+        </Tfoot>
+      </section>
 
-      <RowHead>
-        <el-checkbox @change="HandleHwAllChecked($event)" v-model="hwAllChecked">全選</el-checkbox>
-      </RowHead>
-      <RowBody>
-        <div class="sku-row"  v-for="(h, hidx) in HuaWeiCartData" :key="hidx">
-            <ul class="sku-gather">
-                <li class="sku-col col-check">
-                    <input type="checkbox" @change="HandleHwSkuChecked($event, h)" :value="h.skuId" v-model="HuaWeiSkuCheckedData" />           
-                    <!--<el-checkbox  @change="HandleHwSkuChecked($event, h)" :true-label="h.skuId" v-model="HuaWeiSkuCheckedData[hidx]"></el-checkbox>--> 
-                </li>
-                <li class="sku-col col-img">
-                    <p><img :src="h.sbom.photoName" /></p>
-                </li>
-                <li class="sku-col col-name">
-                    <p>{{h.itemName}}</p>
-                </li>
-                <li class="sku-col col-price">{{h.originalPrice}}</li>
-                <li class="sku-col col-amount">
-                    <el-input-number v-show="false" v-model="h.qty" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
-                    <div class="">
-                        <span class="col-minus" @click="HandleMinusAmount($event, h)">-</span>
-                        <input class="col-amount-input" @input="HandleInputAmount($event, h)" v-model="h.qty" />
-                        <span class="col-plus" @click="HandlePlusAmount($event, h)">+</span>
-                    </div>
-                </li>
-                <li class="sku-col col-total">{{h.originalPrice * h.qty}}</li>
-                <li class="sku-col col-action">
-                    <p>移入收藏夹</p>
-                    <p>刪除</p>
-                </li>
-            </ul>
-        </div>
-      </RowBody>
-      <div>總價: {{HwSelectedPrice}}</div>
+      <section>
+        <RowHead>
+            <el-checkbox @change="HandleHwAllChecked($event)" v-model="hwAllChecked">全選</el-checkbox>
+        </RowHead>
+        <RowBody>
+            <div class="sku-row"  v-for="(h, hidx) in HuaWeiCartData" :key="hidx">
+                <ul class="sku-gather">
+                    <li class="sku-col col-check">
+                        <input type="checkbox" @change="HandleHwSkuChecked($event, h)" :value="h.skuId" v-model="HuaWeiSkuCheckedData" />           
+                        <!--<el-checkbox  @change="HandleHwSkuChecked($event, h)" :true-label="h.skuId" v-model="HuaWeiSkuCheckedData[hidx]"></el-checkbox>--> 
+                    </li>
+                    <li class="sku-col col-img">
+                        <p><img :src="h.sbom.photoName" /></p>
+                    </li>
+                    <li class="sku-col col-name">
+                        <p>{{h.itemName}}</p>
+                    </li>
+                    <li class="sku-col col-price">{{h.originalPrice}}</li>
+                    <li class="sku-col col-amount">
+                        <el-input-number v-show="false" v-model="h.qty" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
+                        <div class="">
+                            <span class="col-minus" @click="HandleMinusAmount($event, h)">-</span>
+                            <input class="col-amount-input" @input="HandleInputAmount($event, h)" v-model="h.qty" />
+                            <span class="col-plus" @click="HandlePlusAmount($event, h)">+</span>
+                        </div>
+                    </li>
+                    <li class="sku-col col-total">{{h.originalPrice * h.qty}}</li>
+                    <li class="sku-col col-action">
+                        <p>移入收藏夹</p>
+                        <p>刪除</p>
+                    </li>
+                </ul>
+            </div>
+        </RowBody>
+        <div>總價: {{HwSelectedPrice}}</div>
+      </section>
+
+      <section>
+        
+      </section>
 
   </CartGrid>
 </template>

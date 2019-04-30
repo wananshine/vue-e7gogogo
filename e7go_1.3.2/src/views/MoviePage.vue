@@ -1,19 +1,18 @@
-
 <template>
-  <CollectionGrid>
-      <CollectionInner>
-        <GoodsItem v-for="(c, cidx) in collectionData.list" :key="cidx">
-            <div class="coll-img">
-                <img src="//img11.360buyimg.com/n2/jfs/t7447/318/2567254277/105570/2717105a/59b1092aNbe8c39ab.jpg">
-                <!--<img :scr="c.imageUrl" />-->
-            </div>
-            <div class="coll-info">
-                <p class="coll-price">{{c.actualCurrentPrice}}</p>
-                <p class="coll-title">{{c.title}}</p>
-            </div>
-        </GoodsItem>
-      </CollectionInner>
-  </CollectionGrid>
+  <MovieGrid>
+      <ul>
+        <li v-for="(m, midx) in movieList" :key="midx">
+            <a :href="m.alt">
+                <div>
+                    <img :src="m.images.medium" />
+                </div>
+                <div>
+                    {{m.title}}
+                </div>
+            </a>
+        </li>
+      </ul>
+  </MovieGrid>
 </template>
 <style lang="less" scoped="true">
 </style>
@@ -21,62 +20,26 @@
 /***********************************************************/
  
 import styled from 'vue-styled-components';
-import { styleFn } from "../../assets/js/stylebase"
-import { KaoLaGetRecommendGoods } from "../../assets/json/cartBuy"
+import { postJSON, getJSON } from '@/api/api1'
+import { todayVideo } from '@/api/api2'
+
 
 /***********************************************************/
-const CollectionGrid = styled.div`
-    width: auto;
+const MovieGrid = styled.div`
+    width: 1200px;
     margin: auto;
     position: relative;
     overflow: hidden;
 `
-const CollectionInner = styled.div`
-    position: relative;
-    overflow: hidden;
-    width: 1100px;
-`
-const GoodsItem = styled.div`
-    float: left;
-    width: 245px;
-    margin-right: 30px;
-    box-sizing: border-box;
-    border: 1px solid #eee;
-    .coll-img{
-        width: 150px;
-        height: 150px;
-        margin: 20px auto;
-        img{ 
-            width: 100%; 
-            height: 150px;
-        }
-    }
-    .coll-info{
-        margin-bottom: 10px;
-        padding: 0px 20px;
-    }
-    .coll-price{
-        line-height: 20px;
-        text-align: center;
-    }
-    .coll-title{
-        overflow: hidden;
-        font-size: 12px;
-        line-height: 20px;
-        ${styleFn.ellipsis};
-    }
-`
 /***********************************************************/
 export default {
     components: {   
-      CollectionGrid,
-      CollectionInner,
-      GoodsItem
+      MovieGrid,
     },
     name: "",
     data() {
         return {
-            collectionData: KaoLaGetRecommendGoods
+            movieList: [] 
         }
     },
     computed: {},
@@ -97,8 +60,28 @@ export default {
     },
     beforeCreate() {},
     created() {
-        console.log(KaoLaGetRecommendGoods, this.collectionData);
-        this.$set(this.$data, "collectionData", KaoLaGetRecommendGoods);
+
+        //获取电影top250
+        //http://api.douban.com/v2/movie/top250?start=25&count=25
+        //http://api.wangshuwen.com/getTopMovie
+        getJSON('http://api.wangshuwen.com/getTopMovie?start=25&count=25', {})
+            .then(res=>{
+                const resData = JSON.parse(res);
+                if(resData.code === 1){
+                    this.$set(this.$data, "movieList", resData.data.subjects);
+                }
+                console.log("222222222",this.movieList, resData, JSON.parse(res))
+            }).catch(err=>{
+                console.log(err)
+            })
+
+        //每日视频推荐
+        todayVideo().then((response)=>{
+            console.log("333333333333",response)
+        }).catch((error)=>{
+            console.log(error)
+        })
+
         this.$nextTick(()=>{
             
         })

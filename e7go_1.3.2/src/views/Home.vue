@@ -4,7 +4,7 @@
       <el-button @click="getCookiesCustomer()">el-button</el-button>
     </div>
     <!--<img src="../assets/logo.png">-->
-    <SiteHeader></SiteHeader>
+    <SiteHeader :isShow="true"></SiteHeader>
     <BannerGrid></BannerGrid>
     <BrandCarouselGrid></BrandCarouselGrid>
     <HotProductsProcurement></HotProductsProcurement>

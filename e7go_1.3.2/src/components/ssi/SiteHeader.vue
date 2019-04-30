@@ -66,7 +66,42 @@
       </SearchBar>
 
       <!-- 導航欄 -->
-      <NavBar>
+      <NavBar v-if="isShow">
+          <div class="bar-inner">
+            <div class="line"></div>
+            <SiteCategoryItem></SiteCategoryItem>
+            <!--background-color="#1582ff"  :default-active="activeIndex"  active-text-color="#ffd04b"-->
+            <el-menu
+              :default-active="$route.path"
+              router
+              class="el-menu-demo"
+              mode="horizontal"
+              @select="handleSelect"
+              background-color="#fff"
+              text-color="rgba(0,0,0,0.8)"
+              active-text-color="#1582ff"
+            >
+              <el-menu-item index="/">首页</el-menu-item>
+              <el-submenu index="2">
+                <template slot="title">我的工作台</template>
+                <el-menu-item index="2-1">选项1</el-menu-item>
+                <el-menu-item index="2-2">选项2</el-menu-item>
+                <el-menu-item index="2-3">选项3</el-menu-item>
+              </el-submenu>
+              <el-menu-item index="/movie">电影区</el-menu-item>
+              <el-menu-item index="/music">音乐厅</el-menu-item>
+              <!-- <el-menu-item index="7">医药馆</el-menu-item> -->
+              <el-menu-item index="8">旅行社</el-menu-item>
+              <el-menu-item index="9">供应商合作</el-menu-item>
+              <el-menu-item index="11">資訊速遞</el-menu-item>
+              <el-menu-item index="12">企業服務</el-menu-item>
+              <el-menu-item index="/news">新闻中心</el-menu-item>
+            </el-menu>
+          </div>
+      </NavBar>
+
+      <!-- 導航欄 -->
+      <NavBar v-if="!isShow">
           <div class="bar-inner">
             <div class="line"></div>
             <SiteCategoryItem></SiteCategoryItem>
@@ -206,6 +241,12 @@ export default {
         SiteCategoryItem,
     },
     name: "",
+    props: {
+      isShow: {
+        type: Boolean,
+        required: false
+      }
+    },
     data() {
         return {
             searchKey: "",
@@ -231,6 +272,7 @@ export default {
     },
     beforeCreate() {},
     created() {
+        console.log("isShow:",this.isShow)
         this.$nextTick(()=>{})
         /*this.$microtask(()=>{
             console.log("caonima")

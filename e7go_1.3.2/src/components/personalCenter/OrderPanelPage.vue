@@ -51,7 +51,7 @@ const btnProps = {
 }
 
 const OrderPanelGrid = styled.div`
-    width: 1200px;
+    // width: 1200px;
     margin: auto;
     position: relative;
     overflow: hidden;

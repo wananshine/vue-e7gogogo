@@ -46,9 +46,12 @@ module.exports = {
           // proxy: 'http://localhost:4000' // 配置跨域处理,只有一个代理
           proxy: {
                 '/api': {
-                    target: '<url>',
-                    ws: true,
-                    changeOrigin: true
+                    target: 'https://movie.douban.com/',  // target host
+                    ws: true,  // proxy websockets 
+                    changeOrigin: true,  // needed for virtual hosted sites
+                    pathRewrite: {
+                        '^/apis': '/'  // rewrite path
+                    }
                 },
                 '/douyucdn': {
                     target: 'http://open.douyucdn.cn/',

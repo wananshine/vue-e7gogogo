@@ -66,7 +66,7 @@ const routes = [
       children:[
         {
           path: '/personal_center',
-          component: () => import(/* webpackChunkName: "about" */ '@/components/personalCenter/InformationPage.vue'),
+          component: () => import(/* webpackChunkName: "about" */ '@/components/personalCenter/UserInformationPage.vue'),
             // component: information_page,
         },
         {
@@ -88,9 +88,49 @@ const routes = [
         {
           path:'/personal_center/address',
           component: () => import(/* webpackChunkName: "about" */ '@/components/personalCenter/AddressListPage.vue'),
+        },
+        {
+          path:'/personal_center/invoice',
+          component: () => import(/* webpackChunkName: "about" */ '@/components/personalCenter/InvoicePage.vue'),
         }
       ]
-    }
+    },
+    {
+      path: '/music',
+      name: 'music',
+      meta: { title: '音乐厅' },
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './views/MusicPage.vue')
+    },
+    {
+      path: '/movie',
+      name: 'movie',
+      meta: { title: '电影院' },
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './views/MoviePage.vue')
+   },
+    {
+      path: '/news',
+      name: 'news',
+      meta: { title: '新闻中心' },
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './views/NewsPage.vue')
+    },
+    {
+      path: '/wy',
+      name: 'wy',
+      meta: { title: '网易新闻' },
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './views/wy.vue')
+    },
 ]
 const router = new Router({
     mode: "history",
