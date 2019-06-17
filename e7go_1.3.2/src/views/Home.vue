@@ -4,7 +4,8 @@
       <el-button @click="getCookiesCustomer()">el-button</el-button>
     </div>
     <!--<img src="../assets/logo.png">-->
-    <SiteHeader :isShow="true"></SiteHeader>
+    <!-- <SiteHeader :isShow="true"></SiteHeader> -->
+    <SiteHeader isType="home"></SiteHeader>
     <BannerGrid></BannerGrid>
     <BrandCarouselGrid></BrandCarouselGrid>
     <HotProductsProcurement></HotProductsProcurement>
@@ -75,7 +76,7 @@ export default {
                dispatch(fetchedQuotationSkus(data));
             };
         }*/
-        this.$cookies.config('7d')
+        this.$cookies.config('7d');
         this.$cookies.set("keyName", "time")
     },
     computed: {

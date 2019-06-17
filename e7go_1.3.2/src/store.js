@@ -28,6 +28,7 @@ export default new Vuex.Store({
     token: "",
     testData: null,
     isLogin: null,
+    isLoadShow: false,
   },
   getters: {
     isLogin(state) { 
@@ -36,6 +37,9 @@ export default new Vuex.Store({
       }else{
         return state.isLogin = 2
       }
+    },
+    isLoadShow(state) {
+      return state.isLoadShow
     },
     ddd(state) { 
       this.axios.get("https://3g.163.com/touch/reconstruct/article/list/BD2A9LEIwangning/0-20.html")
@@ -50,6 +54,7 @@ export default new Vuex.Store({
         })
     }
   },
+  //mutations使用commit触发
   mutations: {
     SIGNIN(state, data) {
 
@@ -60,10 +65,12 @@ export default new Vuex.Store({
     SIGNOUT(state, data) { 
 
     },
-    IS_SHOW(state, data) { 
-
+    IS_LOAD_SHOW(state, data) { 
+      state.isLoadShow = data;
+      console.log("IS_LOAD_SHOW:", state, data);
     },
   },
+  //actions使用dispatch触发
   actions: {
     //登录
     signIn(context) {
@@ -77,8 +84,9 @@ export default new Vuex.Store({
     signOut(context) { 
       context.commit('SIGNOUT');
     },
-    isShow(context) {
-      context.commit('IS_SHOW');
+    isLoadShow(context, args) {
+      console.log("isLoadShow:", args)
+      context.commit('IS_LOAD_SHOW', args);
     }, 
   }
 })

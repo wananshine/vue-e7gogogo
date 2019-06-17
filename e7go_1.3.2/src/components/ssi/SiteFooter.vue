@@ -17,6 +17,7 @@ import styled from 'vue-styled-components';
 /***********************************************************/
 const SiteFooter = styled.div`
     width: 100%;
+    min-width: 1200px;
     margin: 100px auto 0px;
     padding: 20px 0px;
     position: relative;

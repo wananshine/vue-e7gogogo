@@ -1,14 +1,17 @@
 <template>
   <AboutGrid>
-      <SiteHeader :isShow="false"></SiteHeader>
-      {{reMsg()}}
+      <!-- <SiteHeader :isShow="false"></SiteHeader> -->
+      <SiteHeader isType="about"></SiteHeader>
+      <section>
+        aboout
+      </section>
   </AboutGrid>
 </template>
 <style lang="less" scoped="true">
 </style>
 <script type="text/javascript">
 /***********************************************************/
- 
+
 import styled from 'vue-styled-components';
 import SiteHeader from '@/components/ssi/SiteHeader.vue'
 
@@ -17,28 +20,26 @@ const AboutGrid = styled.div`
     width: 100%;
     margin: auto;
     position: relative;
-    
+
+`
+const AboutWrap = styled.div`
+  width: 1200px;
+  margin: auto;
 `
 /***********************************************************/
-const reMsg = ()=>{
-            return (
-                <div>123</div>
-            )
-        }
+
 export default {
-    components: {  
+    components: {
       SiteHeader,
       AboutGrid,
     },
     name: "",
     data() {
         return {
-            brandList: [] 
+            brandList: []
         }
     },
-    computed: {
-        
-    },
+    computed: {},
     watch: {
         //监听数组
         goodsData: {
@@ -58,7 +59,7 @@ export default {
     created() {
 
         this.$nextTick(()=>{
-            
+
         })
         /*this.$microtask(()=>{
             console.log("caonima")

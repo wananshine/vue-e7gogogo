@@ -7,27 +7,27 @@
 </style>
 <script type="text/javascript">
 /***********************************************************/
- 
+
 import styled from 'vue-styled-components';
 import { postJSON, getJSON } from '@/api/api1'
 import { journalismApi } from '@/api/api2'
 
 /***********************************************************/
 const NewsGrid = styled.div`
-    width: 1200px;
+    width: 100%;
     margin: auto;
     position: relative;
     overflow: hidden;
 `
 /***********************************************************/
 export default {
-    components: {   
+    components: {
       NewsGrid,
     },
     name: "",
     data() {
         return {
-            brandList: [] 
+            brandList: []
         }
     },
     computed: {},
@@ -54,7 +54,7 @@ export default {
             console.log(error)
         })
         this.$nextTick(()=>{
-            
+
         })
         /*this.$microtask(()=>{
             console.log("caonima")

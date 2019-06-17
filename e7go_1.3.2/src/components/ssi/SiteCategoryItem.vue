@@ -1,48 +1,70 @@
 <!-- 全部商品分類導航( 絕對定位 ) -->
 <template>
   <CategoryItem >
-    <div class="main-menu">
-      <i class="el-icon-menu"></i>
-      <span>全部商品分類</span>
-    </div>
-    <div class="category-content" @mouseleave="mouseLeaveCustomer($event)">
-        <!-- 父級分類加載 -->
-        <ul class="main-category-list">
-            <li  @mouseenter="mouseEnterCustomer($event, category)" v-for="(category, cgidx) in categoryList"  :class="[category.id === categoryShow ? 'category-item-active' : '', 'category-item']" :key="cgidx">
-                {{category.name}}
-            </li>
-        </ul>
+    <div @mouseleave="mouseEnterSlideHideCustomer($event)">
+      <div class="main-menu" @mouseenter="mouseEnterSlideShowCustomer($event)" >
+        <i class="el-icon-menu"></i>
+        <span>全部商品分類</span>
+      </div>
+      <div v-if="typeString == 'home'" class="category-content" @mouseleave="mouseLeaveCustomer($event)">
+          <!-- 父級分類加載 -->
+          <ul class="main-category-list">
+              <li  @mouseenter="mouseEnterCustomer($event, category)" v-for="(category, cgidx) in categoryList"  :class="[category.id === categoryShow ? 'category-item-active' : '', 'category-item']" :key="cgidx">
+                  {{category.name}}
+              </li>
+          </ul>
 
-        <!-- 所有子級分類加載 -->
-        <div v-if="false" class="child-category-list">
-            <div v-for="(category, childidx) in categoryList" 
-                v-if="category.id === categoryShow"
-                :data-childidx = "childidx"
-                :key="childidx">
-                {{category.id}} *******
-            </div>
-        </div>
+          <!-- 所有子級分類加載 -->
+          <div v-if="false" class="child-category-list">
+              <div v-for="(category, childidx) in categoryList"
+                  v-if="category.id === categoryShow"
+                  :data-childidx = "childidx"
+                  :key="childidx">
+                  {{category.id}} *******
+              </div>
+          </div>
 
-        <!-- 所需子級分類加載 -->
-        <div class="child-category-detail" v-if="categoryDetailShow.id === categoryShow">
-            <div class="cate-list" :data-childidx = "categoryDetailShow.id">
-                <dl v-for="(cell, cellidx) in cellList" :key="cellidx">
-                    <dt v-text="cell.title"></dt>
-                    <dd>
-                        <a v-for="(c, cidx) in cell.child" :key="cidx" v-text="c.name"></a>
-                    </dd>
-                </dl>
-            </div>
-        </div>
+          <!-- 所需子級分類加載 -->
+          <div class="child-category-detail" v-if="categoryDetailShow.id === categoryShow">
+              <div class="cate-list" :data-childidx = "categoryDetailShow.id">
+                  <dl v-for="(cell, cellidx) in cellList" :key="cellidx">
+                      <dt v-text="cell.title"></dt>
+                      <dd>
+                          <a v-for="(c, cidx) in cell.child" :key="cidx" v-text="c.name"></a>
+                      </dd>
+                  </dl>
+              </div>
+          </div>
+      </div>
+
+      <div v-else class="category-content" @mouseleave="mouseLeaveCustomer($event)">
+          <!-- 父級分類加載 -->
+          <ul class="main-category-list" v-if="slideShow">
+              <li  @mouseenter="mouseEnterCustomer($event, category)" v-for="(category, cgidx) in categoryList"  :class="[category.id === categoryShow ? 'category-item-active' : '', 'category-item']" :key="cgidx">
+                  {{category.name}}
+              </li>
+          </ul>
+
+          <!-- 所需子級分類加載 -->
+          <div class="child-category-detail" v-if="categoryDetailShow.id === categoryShow">
+              <div class="cate-list" :data-childidx = "categoryDetailShow.id">
+                  <dl v-for="(cell, cellidx) in cellList" :key="cellidx">
+                      <dt v-text="cell.title"></dt>
+                      <dd>
+                          <a v-for="(c, cidx) in cell.child" :key="cidx" v-text="c.name"></a>
+                      </dd>
+                  </dl>
+              </div>
+          </div>
+      </div>
     </div>
-    
   </CategoryItem>
 </template>
 <style lang="less" scoped="true">
 </style>
 <script type="text/javascript">
 /***********************************************************/
- 
+
 import styled from 'vue-styled-components';
 
 
@@ -84,7 +106,7 @@ const CategoryItem = styled.div`
             }
             .category-item-active{
                 background-color: #1582ff;
-                
+
             }
         }
 
@@ -92,7 +114,7 @@ const CategoryItem = styled.div`
             position:  ;
             // background-color: #fff;
             background-color: rgba(0,0,0,0.2);
-        }  
+        }
 
         .child-category-detail{
             position: absolute;
@@ -108,17 +130,17 @@ const CategoryItem = styled.div`
                     overflow: hidden;
                     padding: 10px 0px 0px;
                     text-align: center;
-                    dt{ 
-                        width: 160px; 
-                        float: left; 
-                        font-size: 14px; 
-                        // font-weight: 100; 
-                        cursor: pointer; 
+                    dt{
+                        width: 160px;
+                        float: left;
+                        font-size: 14px;
+                        // font-weight: 100;
+                        cursor: pointer;
                         &:hover{ color: #1582ff }
                     }
-                    dd{ 
-                        font-size: 12px; 
-                        // font-weight: 100; 
+                    dd{
+                        font-size: 12px;
+                        // font-weight: 100;
                         text-align: left;
                         width: 800px;
                         float: left;
@@ -129,16 +151,22 @@ const CategoryItem = styled.div`
                 }
             }
         }
-        
+
     }
-    
+
 `
 /***********************************************************/
 export default {
-    components: {   
+    components: {
       CategoryItem,
     },
     name: "",
+    props: {
+      typeString: {
+        type: String,
+        required: false
+      }
+    },
     data() {
         return {
             categoryShow: "",
@@ -295,7 +323,8 @@ export default {
                     ]
                 }
             ],
-            brandList: [] 
+            brandList: [],
+            slideShow: false,
         }
     },
     computed: {},
@@ -316,9 +345,8 @@ export default {
     },
     beforeCreate() {},
     created() {
-
         this.$nextTick(()=>{
-            
+
         })
         /*this.$microtask(()=>{
             console.log("caonima")
@@ -326,6 +354,7 @@ export default {
     },
     beforeMount() {},
     mounted() {
+        console.log("typeString:",this.typeString)
         this.$nextTick(function() {
             this.fetchGoodsId();
             // console.log(this.$apollo.queries.hello)
@@ -351,7 +380,15 @@ export default {
             // this.$router.replace({ path: '/indexCart' })
             console.log(e)
             // this.$set(this.$data, "categoryShow", "");
-            Object.assign(this.$data, {categoryShow: ""})
+            Object.assign(this.$data, {categoryShow: "", slideShow: false})
+        },
+        mouseEnterSlideShowCustomer(e){
+          this.$set(this.$data, "slideShow", true);
+          console.log(this.$data)
+        },
+        mouseEnterSlideHideCustomer(e){
+          this.$set(this.$data, "slideShow", false);
+          console.log(this.$data)
         }
     },
     beforeRouteEnter(to,from,next){

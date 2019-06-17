@@ -66,9 +66,11 @@
 </style>
 
 <script type="text/javascript">
-/***********************************************************/
- 
+
 import styled from 'vue-styled-components';
+
+/***********************************************************/ 
+
 
 const font_12 = {
     "font-size": "12px"

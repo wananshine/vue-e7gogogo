@@ -1,5 +1,8 @@
 <template>
   <MovieGrid>
+    <!-- <SiteHeader :isShow="false"></SiteHeader> -->
+    <SiteHeader isType="movie"></SiteHeader>
+    <MovieWrap>
       <ul>
         <li v-for="(m, midx) in movieList" :key="midx">
             <a :href="m.alt">
@@ -12,34 +15,44 @@
             </a>
         </li>
       </ul>
+    </MovieWrap>
   </MovieGrid>
 </template>
 <style lang="less" scoped="true">
 </style>
 <script type="text/javascript">
 /***********************************************************/
- 
+
 import styled from 'vue-styled-components';
 import { postJSON, getJSON } from '@/api/api1'
 import { todayVideo } from '@/api/api2'
+import SiteHeader from '@/components/ssi/SiteHeader.vue'
 
 
 /***********************************************************/
 const MovieGrid = styled.div`
+    width: 100%;
+    margin: auto;
+    position: relative;
+`
+const MovieWrap = styled.div`
     width: 1200px;
+    min-width: 1200px;
     margin: auto;
     position: relative;
     overflow: hidden;
 `
 /***********************************************************/
 export default {
-    components: {   
+    components: {
+      SiteHeader,
       MovieGrid,
+      MovieWrap,
     },
     name: "",
     data() {
         return {
-            movieList: [] 
+            movieList: []
         }
     },
     computed: {},
@@ -83,7 +96,7 @@ export default {
         })
 
         this.$nextTick(()=>{
-            
+
         })
         /*this.$microtask(()=>{
             console.log("caonima")

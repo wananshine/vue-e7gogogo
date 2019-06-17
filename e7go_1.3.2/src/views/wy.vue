@@ -31,7 +31,7 @@
 </style>
 <script type="text/javascript">
 /***********************************************************/
- 
+
 import styled from 'vue-styled-components';
 
 
@@ -98,7 +98,7 @@ const CategoryBox = styled.div`
 `
 /***********************************************************/
 export default {
-    components: {   
+    components: {
       H,
       TopNav,
       TabNav,
@@ -120,7 +120,7 @@ export default {
                 { txt: "直播" },
                 { txt: "视频" },
                 { txt: "科技" },
-            ] 
+            ]
         }
     },
     computed: {},
@@ -143,7 +143,7 @@ export default {
     created() {
 
         this.$nextTick(()=>{
-            
+
         })
         /*this.$microtask(()=>{
             console.log("caonima")

@@ -97,9 +97,53 @@
         <div>總價: {{HwSelectedPrice}}</div>
       </section>
 
-      <section>
-        
-      </section>
+      <SectionContainer>
+        <RowTitle>
+            <RowSku>
+                <ColSkuCheckedBox>
+                    <a>
+                        <div>
+                            <input id="is_101" type="checkbox" />
+                            <label for="is_101" data-type="checkbox">全选</label>
+                        </div>
+                    </a>
+                </ColSkuCheckedBox>
+                <ColSkuImg></ColSkuImg>
+                <ColSkuName></ColSkuName>
+                <ColSkuPrice></ColSkuPrice>
+                <ColSkuAmount></ColSkuAmount>
+                <ColSkuTotalPrice></ColSkuTotalPrice>
+                <ColSkuAction></ColSkuAction>
+            </RowSku>
+        </RowTitle>
+        <RowContent>
+            <RowSku v-for="(hw, hwidx) in HuaWeiCartData" :key="hwidx">
+                <ColSkuCheckedBox>
+                    <a>
+                        <input :id="'isChecked_'+hw.skuId" type="checkbox" />
+                        <label :for="'isChecked_'+hw.skuId" data-type="checkbox"></label>
+                    </a>
+                </ColSkuCheckedBox>
+                <ColSkuImg>
+                    <a><img :src="hw.sbom.photoName" /></a>
+                </ColSkuImg>
+                <ColSkuName><a>{{hw.itemName}}</a></ColSkuName>
+                <ColSkuPrice>{{hw.originalPrice}}</ColSkuPrice>
+                <ColSkuAmount>
+                    <span>-</span>
+                    <input />
+                    <span>+</span>
+                </ColSkuAmount>
+                <ColSkuTotalPrice>
+                    45646
+                </ColSkuTotalPrice>
+                <ColSkuAction>
+                    <a>移入收藏夹</a>
+                    <a>删除</a>
+                </ColSkuAction>
+            </RowSku>
+        </RowContent>
+      </SectionContainer>
 
   </CartGrid>
 </template>
@@ -231,15 +275,73 @@ const RowBody = styled.div`
         }
     }
 `
+const SectionContainer = styled.section`
+    input[type="checkbox"]{
+        border-color: red;
+    }
+    label[data-type="checkbox"]{
+        cursor: pointer;
+    }
+    input[type="checkbox"]+label[data-type="checkbox"]::before{
+        content: "";
+        display: inline-block;
+        vertical-align: top;
+        width: 16px;
+        height: 16px;
+        margin-right: 10px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #e8e8e8;
+        border-radius: 3px;
+        text-indent: 15px;
+    }
+    input[type="checkbox"]:checked+label[data-type="checkbox"]::before{
+        content: "";
+        border-color: red;
+    }
+`
+const RowTitle = styled.div``
+const RowContent = styled.div``
+const RowSku = styled.ul`
+    li{ display: inline-block; vertical-align: top;  }
+`
+const ColSkuCheckedBox = styled.li`
+    vertical-align: middle !important;
+`
+const ColSkuImg = styled.li`
+    a{ 
+        display: block;
+        width: 90px;
+        img{ width: 100%; } 
+    }
+`
+const ColSkuName = styled.li``
+const ColSkuPrice = styled.li``
+const ColSkuAmount = styled.li``
+const ColSkuTotalPrice = styled.li``
+const ColSkuAction = styled.li``
 /***********************************************************/
 export default {
     components: {   
-      CartGrid,
-      Thead,
-      Tbody,
-      Tfoot,
-      RowHead,
-      RowBody
+        CartGrid,
+        Thead,
+        Tbody,
+        Tfoot,
+
+        RowHead,
+        RowBody,
+
+        SectionContainer,
+        RowTitle,
+        RowContent,
+        RowSku,
+        ColSkuCheckedBox,
+        ColSkuImg,
+        ColSkuName,
+        ColSkuPrice,
+        ColSkuAmount,
+        ColSkuTotalPrice,
+        ColSkuAction,
     },
     name: "",
     data() {
@@ -447,9 +549,6 @@ export default {
         skuFavoritesCustomer(e){},
         //刪除
         skuDeleteCustomer(e){},
-
-
-
         handleChange(value) {
             console.log(value);
         },

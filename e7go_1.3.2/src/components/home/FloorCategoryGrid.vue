@@ -145,14 +145,14 @@
             </FloorCategoryProducts>
         </FloorCategoryInner>
 
-        
+
   </FloorCategoryGrid>
 </template>
 <style lang="less" scoped="true">
 </style>
 <script type="text/javascript">
 /***********************************************************/
- 
+
 import styled from 'vue-styled-components';
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import { commonStyle, styleFn } from '@/assets/js/stylebase'
@@ -195,7 +195,7 @@ const FloorCategoryTitle = styled.h3`
     .pt-lg-tit{
         strong{ font-size: 22px; coloe: #000; margin-left: 5px; cursor: pointer; }
     }
-    .pt-xs-tit{ 
+    .pt-xs-tit{
         display: inherit;
         text-align: right;
         a{ font-size: 14px; padding: 0px 5px; cursor: pointer; }
@@ -233,7 +233,7 @@ const FloorCategoryProducts = styled.div`
                 flex-shrink: 1;
                 flex-grow: 0;
                 flex-basis: auto;
-                img{ width: 80%; } 
+                img{ width: 80%; }
             }
         }
         .pt-brand{
@@ -280,17 +280,17 @@ const FloorProducts = styled.div`
             flex-wrap: wrap;
             align-items: flex-start;
             justify-content: space-between;
-            align-content: flex-start; 
-            .pt-cell{ 
+            align-content: flex-start;
+            .pt-cell{
                 position: relative;
                 overflow: hidden;
-                width: 230px; 
-                height: 48%; 
-                margin-bottom: 1%; 
-                flex-shrink: 1; 
-                flex-grow: 0; 
-                flex-basis: auto; 
-                background: #f5f5f5; 
+                width: 230px;
+                height: 48%;
+                margin-bottom: 1%;
+                flex-shrink: 1;
+                flex-grow: 0;
+                flex-basis: auto;
+                background: #f5f5f5;
                 display: block;
                 .pt-img{
                     img{ width: 100%; }
@@ -474,7 +474,7 @@ const RowBrands = styled.div`
 
 /***********************************************************/
 export default {
-    components: {  
+    components: {
         swiper,
         swiperSlide,
         FloorCategoryGrid,
@@ -524,7 +524,7 @@ export default {
         this.floorList = JsonData.KaoLaGetSportsGoods.data;
         console.log(this.floorList)
         this.$nextTick(()=>{
-            
+
         })
         /*this.$microtask(()=>{
             console.log("caonima")

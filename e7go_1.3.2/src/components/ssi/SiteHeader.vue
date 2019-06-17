@@ -65,8 +65,11 @@
         </el-row>
       </SearchBar>
 
-      <!-- 導航欄 -->
-      <NavBar v-if="isShow">
+      <!-- 導航欄  data-type控制顯示哪種導航欄-->
+      <NavigationBar :data-type="isType"></NavigationBar>
+
+      <!-- 導航欄  !isShow-->
+      <NavBar v-if="false">
           <div class="bar-inner">
             <div class="line"></div>
             <SiteCategoryItem></SiteCategoryItem>
@@ -100,8 +103,8 @@
           </div>
       </NavBar>
 
-      <!-- 導航欄 -->
-      <NavBar v-if="!isShow">
+      <!-- 導航欄 !isShow-->
+      <NavBar v-if="false">
           <div class="bar-inner">
             <div class="line"></div>
             <SiteCategoryItem></SiteCategoryItem>
@@ -132,6 +135,8 @@
             </el-menu>
           </div>
       </NavBar>
+
+
   </SiteHead>
 </template>
 <style lang="less" scoped="true">
@@ -175,14 +180,14 @@ const TopBar = styled(HeadBoxStyle)`
             .t-bar-personal{ cursor: pointer; &:hover{ color: rgb(21, 130, 255) } }
             .el-dropdown{ font-size: 12px; }
         }
-    } 
+    }
 `
 /*搜索欄樣式*/
 const SearchBar = styled(HeadBoxStyle)`
     padding: 20px 0px 40px;
     .bar-inner{
       //display: flex;
-      //display: grid;  
+      //display: grid;
       //grid-template-columns: 300px 500px 300px;
       //grid-template-rows: 120px;
       //grid-column-gap: 15px;
@@ -193,10 +198,10 @@ const SearchBar = styled(HeadBoxStyle)`
       .bar-logo{ text-align: left; }
       .bar-input{
         position: relative; padding-top: 10px;
-        .bar-hot-search{ 
+        .bar-hot-search{
           position: absolute; top: 55px; left: 0px;
-          span{ 
-            display: inline-block; padding-right: 10px; font-size: 12px; cursor: pointer; 
+          span{
+            display: inline-block; padding-right: 10px; font-size: 12px; cursor: pointer;
             &:hover{
               color: #1890ff;
             }
@@ -204,7 +209,7 @@ const SearchBar = styled(HeadBoxStyle)`
         }
         button{ border-radius: 0px; }
       }
-      .bar-cart{ text-align: right; padding-top: 10px;} 
+      .bar-cart{ text-align: right; padding-top: 10px;}
     }
 `
 /*導航欄樣式*/
@@ -223,27 +228,116 @@ const NavBar = styled(HeadBoxStyle)`
       .el-menu{
         padding-left: 200px;
         .el-menu-item,
-        .el-submenu{ 
-          // min-width: 110px; 
+        .el-submenu{
+          // min-width: 110px;
           height: 52px; line-height: 52px;
-          .el-submenu__title{ height: 52px; line-height: 52px; }  
+          .el-submenu__title{ height: 52px; line-height: 52px; }
         }
       }
     }
 `
+/*導航欄列表样式*/
+const NavList = styled.ul`
+  padding-left: 200px;
+  display: flex;
+`
+/*導航欄tab样式*/
+const NavCell = styled.li`
+  height: 52px;
+  line-height: 52px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.8);
+  float: left;
+  margin: 0;
+  padding: 0 20px;
+  border-bottom: 2px solid transparent;
+  background-color: rgb(255, 255, 255);
+  transition: border-color .3s,background-color .3s,color .3s;
+  box-sizing: border-box;
+  cursor: pointer;
+  &:hover{
+    background-color: rgb(204, 204, 204);
+  }
+`
+// 首頁導航欄(或同首頁一樣的導航欄)
+const NavigationBar = (propsData)=>{
+  const { props, parent } = propsData;
+  const type = props.dataType;
+  console.log('propsData:',propsData, props);
+  const navArray = [
+    { txt: "首頁~HOME", route: "" },
+    { txt: "我的工作台", route: "" },
+    { txt: "電影區", route: "movie" },
+    { txt: "音樂廳", route: "music" },
+    { txt: "旅行社", route: "" },
+    { txt: "供應商合作", route: "" },
+    { txt: "資訊速遞", route: "" },
+    { txt: "企業服務", route: "" },
+    { txt: "新聞中心", route: "news" },
+  ];
+  return(
+    <NavBar>
+        {
+            <div class="bar-inner">
+              <div class="line"></div>
+              <SiteCategoryItem typeString={type}></SiteCategoryItem>
+              <NavList>
+                  {
+                    navArray.map((v,i)=>{
+                      return(
+                        <NavCell onClick={(e) =>parent.onChange(e, v.route)}>
+                          {v.txt}
+                        </NavCell>
+                      )
+                    })
+                  }
+              </NavList>
+            </div>
+        }
+    </NavBar>
+  )
+}
+
+class Circle{
+  constructor(radius){
+    this.radius = radius;
+  }
+  render(){
+    return(
+      <div>caonima</div>
+    )
+  }
+}
+
+//Test
+const ItemComponent = (propsData) => {
+    const { props, parent } = propsData;
+    return(
+        <div>123123</div>
+    )
+}
+
 /***********************************************************/
 export default {
-    components: {   
+    components: {
         SiteHead,
         TopBar,
         SearchBar,
         NavBar,
+        NavigationBar,
+        NavList,
+        NavCell,
         SiteCategoryItem,
+        Circle
     },
     name: "",
     props: {
       isShow: {
         type: Boolean,
+        required: false
+      },
+      isType: {
+        type: String,
         required: false
       }
     },
@@ -251,7 +345,7 @@ export default {
         return {
             searchKey: "",
             activeIndex: '1',
-            brandList: [] 
+            brandList: []
         }
     },
     computed: {},
@@ -272,7 +366,7 @@ export default {
     },
     beforeCreate() {},
     created() {
-        console.log("isShow:",this.isShow)
+        console.log("isShow:",this.isShow, this.isType)
         this.$nextTick(()=>{})
         /*this.$microtask(()=>{
             console.log("caonima")
@@ -296,7 +390,7 @@ export default {
         },
         //登录
         singInCustomer(e){
-          
+
         },
         //立即购买
         nowbuyCustomer(product, e) {
@@ -321,6 +415,14 @@ export default {
         //跳转到个人中心
         toPersonalCustomer(e){
           this.$router.push({ path: "/personal_center", query: { key: "" } })
+        },
+        //導航跳轉
+        onChange(e,route){
+          console.log(e,route);
+          this.$router.push({
+            name: route,
+            params: { key: "1" },
+          })
         }
     },
     beforeRouteEnter(to,from,next){

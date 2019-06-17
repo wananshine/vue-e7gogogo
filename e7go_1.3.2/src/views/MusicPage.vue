@@ -1,31 +1,42 @@
 <template>
   <MusicGrid>
-      <section>
-            <MusicRank v-for="(r, ridx) in rankList" :key="ridx">
-                <dt style="color: red;">{{r.name}}</dt>
-                <dd>
-                    <p v-for="(c, cidx) in r.content">
-                        {{c.title}}
-                    </p>
-                </dd>
-            </MusicRank>
-      </section>
+    <!-- <SiteHeader :isShow="false"></SiteHeader> -->
+    <SiteHeader isType="music"></SiteHeader>
+    <MusicWrap>
+      <div>
+        <MusicRank v-for="(r, ridx) in rankList" :key="ridx">
+            <dt style="color: red;">{{r.name}}</dt>
+            <dd>
+                <p v-for="(c, cidx) in r.content">
+                    {{c.title}}
+                </p>
+            </dd>
+        </MusicRank>
+      </div>
+    </MusicWrap>
   </MusicGrid>
 </template>
 <style lang="less" scoped="true">
 </style>
 <script type="text/javascript">
 /***********************************************************/
- 
+
 import styled from 'vue-styled-components';
-import styleFn from '../assets/js/stylebase';
-import { postJSON, getJSON } from '@/api/api1'
-import { musicRankings } from '@/api/api2'
+import { styleFn } from '@/assets/js/stylebase'
+import { postJSON, getJSON } from '@/api/api1';
+import { musicRankings } from '@/api/api2';
+import SiteHeader from '@/components/ssi/SiteHeader.vue';
 
 
 /***********************************************************/
 const MusicGrid = styled.div`
+    width: 100%;
+    margin: auto;
+    position: relative;
+`
+const MusicWrap = styled.section`
     width: 1200px;
+    min-width: 1200px;
     margin: auto;
     position: relative;
     overflow: hidden;
@@ -33,18 +44,20 @@ const MusicGrid = styled.div`
 const MusicRank = styled.dl`
     width: 30%;
     float: left;
-    ${styleFn.ellipsis}
+    ${styleFn.ellipsis};
 `
 /***********************************************************/
 export default {
-    components: {   
+    components: {
+      SiteHeader,
       MusicGrid,
+      MusicWrap,
       MusicRank,
     },
     name: "",
     data() {
         return {
-            rankList: [] 
+            rankList: []
         }
     },
     computed: {},
@@ -75,8 +88,9 @@ export default {
     },
     created() {
 
+
         this.$nextTick(()=>{
-            
+
         })
         /*this.$microtask(()=>{
             console.log("caonima")

@@ -798,7 +798,8 @@
 			"data": {
 				"cashPay": 23882.00,
 				"discount": 200.00,
-				"itemInfos": [{
+				"itemInfos": [
+				{
 					"attrsMap": {},
 					"discount": 100.00,
 					"invalidCauseLeftValue": 0,
@@ -1073,7 +1074,8 @@
 		"code": 200,
 		"msg": "OK",
 		"body": {
-			"frontCategoryList": [{
+			"frontCategoryList": [
+				{
 				"appJumpURL": "null",
 				"bannerImageUrl": "http://haitao.nosdn4.127.net/iqmf9t6y71_244_100.jpg",
 				"bannerTargetUrl": "https://pages.kaola.com/pages/activity/pcmeizhuang.shtml",
@@ -13754,6 +13756,5 @@
 			}]
 		}
 	}
-	
-}
 
+}
