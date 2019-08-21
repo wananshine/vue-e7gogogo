@@ -1,12 +1,24 @@
 
-import { post, fetch, patch, put } from './http2'
+import { post, fetch, patch, put, get } from './http2'
+
+
+export const  zhyqTest = params =>{
+  return  fetch('http://10.130.202.170:8080/search/test', params)
+          .then(res =>{
+            console.log("fetch():",fetch())
+              return res;
+          }, err =>{
+              console.log(err)
+          }).catch(error =>{
+              console.log(error)
+          });
+}
 
 
 // liveList
-export const livingList = params =>{   
-    
+export const livingList = params =>{
+
     //return fetch('http://flnet-wap.flnet.cn/flnet_live/liveList', params)
-    
     return  fetch('http://flnet-wap.flnet.cn/flnet_live/liveList', params)
             .then(res =>{
                 return res;
@@ -15,8 +27,8 @@ export const livingList = params =>{
             }).catch(error =>{
                 reject(error)
             });
-    
-    
+
+
 //    fetch('http://flnet-wap.flnet.cn/flnet_live/liveList', {})
 //        .then(res =>{
 //            return res.data;
@@ -30,7 +42,8 @@ export const livingList = params =>{
 //获取LOL直播分类
 export const  DBlol = params =>{
     return new Promise((resolve, reject) => {
-        fetch('http://api.douyutv.com/api/v1/live/lol', {
+        //http://api.douyutv.com/api/v1/live/lol
+        fetch('http://10.130.202.170:8080/search/test', {
             params: params
         }).then(res => {
             resolve(res)
@@ -49,15 +62,15 @@ export const game = params =>{
             })
             .catch(err=>{
                 reject(err)
-            })   
+            })
     })
 }
 
 //获取热直播
 export const hotLiving = params =>{
     return new Promise((resolve, reject) =>{
-        fetch('http://api.open.huajiao.com/live/getFeeds?platform=server&tag=video&num=1', { 
-            params: params 
+        fetch('http://api.open.huajiao.com/live/getFeeds?platform=server&tag=video&num=1', {
+            params: params
         }).then( res => {
             resolve(res)
         }).catch( err => {
@@ -70,8 +83,8 @@ export const hotLiving = params =>{
 //http://api.open.huajiao.com/live/getVideos
 export const getFeeds = params =>{
     return new Promise((resolve, reject) =>{
-        fetch('http://api.open.huajiao.com/live/getFeeds', { 
-            params: params 
+        fetch('http://api.open.huajiao.com/live/getFeeds', {
+            params: params
         }).then( res => {
             resolve(res)
         }).catch( err => {
@@ -82,8 +95,8 @@ export const getFeeds = params =>{
 
 export const indexVideo = params => {
     return new Promise((resolve, reject) =>{
-        fetch('../apis/video/indexVideo', { 
-            params: params 
+        fetch('../apis/video/indexVideo', {
+            params: params
         }).then(res => {
             console.log(1)
             resolve(res)
@@ -99,8 +112,8 @@ export const indexVideo = params => {
 //https://api.apiopen.top/EmailSearch?number=1012002
 export const EmailSearch = params => {
     return new Promise((resolve, reject) =>{
-        post('https://api.apiopen.top/EmailSearch', { 
-            number: params 
+        post('https://api.apiopen.top/EmailSearch', {
+            number: params
         }).then(res => {
             console.log(1)
             resolve(res)
@@ -114,8 +127,8 @@ export const EmailSearch = params => {
 //https://api.apiopen.top/singlePoetry
 export const singlePoetry = params => {
     return new Promise((resolve, reject) =>{
-        fetch('https://api.apiopen.top/singlePoetry', { 
-            params: params 
+        fetch('https://api.apiopen.top/singlePoetry', {
+            params: params
         }).then(res => {
             console.log(1)
             resolve(res)
@@ -130,8 +143,8 @@ export const singlePoetry = params => {
 //https://api.apiopen.top/recommendPoetry
 export const recommendPoetry = params => {
     return new Promise((resolve, reject) =>{
-        fetch('https://api.apiopen.top/recommendPoetry', { 
-            params: params 
+        fetch('https://api.apiopen.top/recommendPoetry', {
+            params: params
         }).then(res => {
             console.log(1)
             resolve(res)
@@ -145,8 +158,8 @@ export const recommendPoetry = params => {
 //https://api.apiopen.top/searchPoetry?name=古风二首 二
 export const searchPoetry = params => {
     return new Promise((resolve, reject) =>{
-        post('https://api.apiopen.top/searchPoetry', { 
-            name: params 
+        post('https://api.apiopen.top/searchPoetry', {
+            name: params
         }).then(res => {
             console.log(1)
             resolve(res)
@@ -160,8 +173,8 @@ export const searchPoetry = params => {
 //https://api.apiopen.top/searchAuthors?name=李白
 export const searchAuthors = params => {
     return new Promise((resolve, reject) =>{
-        post('https://api.apiopen.top/searchAuthors', { 
-            name: params 
+        post('https://api.apiopen.top/searchAuthors', {
+            name: params
         }).then(res => {
             console.log(1)
             resolve(res)
@@ -175,8 +188,8 @@ export const searchAuthors = params => {
 //https://api.apiopen.top/likePoetry?name=李白
 export const likePoetry = params => {
     return new Promise((resolve, reject) =>{
-        post('https://api.apiopen.top/likePoetry', { 
-            name: params 
+        post('https://api.apiopen.top/likePoetry', {
+            name: params
         }).then(res => {
             console.log(1)
             resolve(res)
@@ -190,7 +203,7 @@ export const likePoetry = params => {
 //https://api.apiopen.top/getSongPoetry?page=1&count=20
 export const getSongPoetry = params => {
     return new Promise((resolve, reject) =>{
-        post('https://api.apiopen.top/getSongPoetry', { 
+        post('https://api.apiopen.top/getSongPoetry', {
             page: params.page,
             count: params.count
         }).then(res => {
@@ -206,7 +219,7 @@ export const getSongPoetry = params => {
 //https://api.apiopen.top/getTangPoetry?page=1&count=20
 export const getTangPoetry = params => {
     return new Promise((resolve, reject) =>{
-        post('https://api.apiopen.top/getTangPoetry', { 
+        post('https://api.apiopen.top/getTangPoetry', {
             page: params.page,
             count: params.count
         }).then(res => {
@@ -222,7 +235,7 @@ export const getTangPoetry = params => {
 //https://api.apiopen.top/searchMusic
 export const searchMusic = params => {
     return new Promise((resolve, reject) =>{
-        fetch('https://api.apiopen.top/searchMusic', { 
+        fetch('https://api.apiopen.top/searchMusic', {
             params: params
         }).then(res => {
             console.log(1)
@@ -237,7 +250,7 @@ export const searchMusic = params => {
 //https://api.apiopen.top/musicBroadcasting
 export const musicBroadcasting = params => {
     return new Promise((resolve, reject) =>{
-        fetch('https://api.apiopen.top/musicBroadcasting', { 
+        fetch('https://api.apiopen.top/musicBroadcasting', {
             params: params
         }).then(res => {
             console.log(1)
@@ -252,7 +265,7 @@ export const musicBroadcasting = params => {
 //https://api.apiopen.top/musicBroadcastingDetails?channelname=public_tuijian_spring
 export const musicBroadcastingDetails = params => {
     return new Promise((resolve, reject) =>{
-        fetch('https://api.apiopen.top/musicBroadcastingDetails', { 
+        fetch('https://api.apiopen.top/musicBroadcastingDetails', {
             channelname: params
         }).then(res => {
             console.log(1)
@@ -267,7 +280,7 @@ export const musicBroadcastingDetails = params => {
 //https://api.apiopen.top/musicDetails
 export const musicDetails = params => {
     return new Promise((resolve, reject) =>{
-        fetch('https://api.apiopen.top/musicDetails', { 
+        fetch('https://api.apiopen.top/musicDetails', {
             params: params
         }).then(res => {
             console.log(1)
@@ -282,7 +295,7 @@ export const musicDetails = params => {
 //https://api.apiopen.top/musicRankings
 export const musicRankings = params => {
     return new Promise((resolve, reject) =>{
-        fetch('https://api.apiopen.top/musicRankings', { 
+        fetch('https://api.apiopen.top/musicRankings', {
             params: params
         }).then(res => {
             console.log(1)
@@ -297,7 +310,7 @@ export const musicRankings = params => {
 //https://api.apiopen.top/musicRankingsDetails?type=1
 export const musicRankingsDetails = params => {
     return new Promise((resolve, reject) =>{
-        post('https://api.apiopen.top/musicRankingsDetails', { 
+        post('https://api.apiopen.top/musicRankingsDetails', {
             type: params
         }).then(res => {
             console.log(1)
@@ -312,7 +325,7 @@ export const musicRankingsDetails = params => {
 //https://api.apiopen.top/todayVideo
 export const todayVideo = params => {
     return new Promise((resolve, reject) =>{
-        fetch('https://api.apiopen.top/todayVideo', { 
+        fetch('https://api.apiopen.top/todayVideo', {
             params: params
         }).then(res => {
             console.log(1)
@@ -327,7 +340,7 @@ export const todayVideo = params => {
 //https://api.apiopen.top/videoHomeTab
 export const videoHomeTab = params => {
     return new Promise((resolve, reject) =>{
-        fetch('https://api.apiopen.top/videoHomeTab', { 
+        fetch('https://api.apiopen.top/videoHomeTab', {
             params: params
         }).then(res => {
             console.log(1)
@@ -343,7 +356,7 @@ export const videoHomeTab = params => {
 //https://api.apiopen.top/videoCategory
 export const videoCategory = params => {
     return new Promise((resolve, reject) =>{
-        fetch('https://api.apiopen.top/videoCategory', { 
+        fetch('https://api.apiopen.top/videoCategory', {
             params: params
         }).then(res => {
             console.log(1)
@@ -358,7 +371,7 @@ export const videoCategory = params => {
 //https://api.apiopen.top/videoCategoryDetails?id=14
 export const videoCategoryDetails = params => {
     return new Promise((resolve, reject) =>{
-        post('https://api.apiopen.top/videoCategoryDetails', { 
+        post('https://api.apiopen.top/videoCategoryDetails', {
             id: params
         }).then(res => {
             console.log(1)
@@ -373,7 +386,7 @@ export const videoCategoryDetails = params => {
 //https://api.apiopen.top/videoRecommend?id=127398
 export const videoRecommend = params => {
     return new Promise((resolve, reject) =>{
-        post('https://api.apiopen.top/videoRecommend', { 
+        post('https://api.apiopen.top/videoRecommend', {
             id: params
         }).then(res => {
             console.log(1)
@@ -389,7 +402,7 @@ export const videoRecommend = params => {
 // https://www.apiopen.top/journalismApi
 export const journalismApi = params => {
     return new Promise((resolve, reject) =>{
-        post('https://www.apiopen.top/journalismApi', { 
+        post('https://www.apiopen.top/journalismApi', {
             params: params
         }).then(res => {
             console.log(1)
@@ -444,6 +457,3 @@ export const journalismApi = params => {
 // https://api.apiopen.top/getSongPoetry?page=1&count=20
 // 获取唐朝古诗词：
 // https://api.apiopen.top/getTangPoetry?page=1&count=20
-
-
-

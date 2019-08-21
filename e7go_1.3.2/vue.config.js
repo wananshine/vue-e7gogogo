@@ -21,7 +21,16 @@ module.exports = {
 
         // pass custom options to pre-processor loaders. e.g. to pass options to
         // sass-loader, use { sass: { ... } }
-        loaderOptions: {},
+        loaderOptions: {
+          css: {},
+          postcss: {
+            plugins: [
+              require('postcss-px2rem')({
+                remUnit: 37.5
+              })
+            ]
+          }
+        },
 
         // Enable CSS modules for all css / pre-processor files.
         // This option does not affect *.vue files.
@@ -47,7 +56,7 @@ module.exports = {
           proxy: {
                 '/api': {
                     target: 'https://movie.douban.com/',  // target host
-                    ws: true,  // proxy websockets 
+                    ws: true,  // proxy websockets
                     changeOrigin: true,  // needed for virtual hosted sites
                     pathRewrite: {
                         '^/apis': '/'  // rewrite path

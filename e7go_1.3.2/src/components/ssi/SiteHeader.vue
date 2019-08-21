@@ -1,11 +1,17 @@
+<style lang="less" scoped="true">
+  .active{
+    color: red;
+  }
+</style>
+
 <template>
   <SiteHead>
       <!-- 頂欄 -->
       <TopBar>
           <div class="bar-inner">
               <div class="t-bar-left">
-                  <span>您好欢迎来到一企购 ！  </span>
-                  <router-link @click="singInCustomer($event)" to="">请登录</router-link>
+                  <span>您好欢迎来到PingGo ！  </span>
+                  <router-link @click="singInCustomer($event)" to="/login">请登录</router-link>
                   <i style="padding: 10px;">|</i>
                   <router-link to="">免费注册</router-link>
               </div>
@@ -25,13 +31,13 @@
       <SearchBar>
         <el-row class="bar-inner">
           <!-- logo -->
-          <el-col class="bar-logo" :span="8">
+          <el-col class="bar-logo" :span="6">
             <div class="grid-content bg-purple-dark">
-              <img src="https://static.e7go.com/prod/static/media/logo3.34f07ab9.png" />
+              <img src="@/assets/images/logo1.png" />
             </div>
           </el-col>
           <!-- 搜索框 -->
-          <el-col class="bar-input" :span="12">
+          <el-col class="bar-input" :span="14">
             <div class="grid-content bg-purple-dark">
               <!-- 輸入搜索 -->
               <el-input placeholder="请输入内容" v-model="searchKey">
@@ -66,7 +72,7 @@
       </SearchBar>
 
       <!-- 導航欄  data-type控制顯示哪種導航欄-->
-      <NavigationBar :data-type="isType"></NavigationBar>
+      <NavigationBar :data-type="isType" :activeBar = "activeBar"></NavigationBar>
 
       <!-- 導航欄  !isShow-->
       <NavBar v-if="false">
@@ -139,8 +145,7 @@
 
   </SiteHead>
 </template>
-<style lang="less" scoped="true">
-</style>
+
 <script type="text/javascript">
 /***********************************************************/
 
@@ -184,7 +189,7 @@ const TopBar = styled(HeadBoxStyle)`
 `
 /*搜索欄樣式*/
 const SearchBar = styled(HeadBoxStyle)`
-    padding: 20px 0px 40px;
+    padding: 20px 0px 20px;
     .bar-inner{
       //display: flex;
       //display: grid;
@@ -195,11 +200,18 @@ const SearchBar = styled(HeadBoxStyle)`
       //grid-gap: 15px 10px;
       //justify-items: stretch;
       //align-items: center;
-      .bar-logo{ text-align: left; }
+      .bar-logo{
+        text-align: left;
+        .grid-content{
+          img{
+            width: 68%;
+          }
+        }
+      }
       .bar-input{
-        position: relative; padding-top: 10px;
+        position: relative; padding-top: 40px;
         .bar-hot-search{
-          position: absolute; top: 55px; left: 0px;
+          position: absolute; top: 86px; left: 0px;
           span{
             display: inline-block; padding-right: 10px; font-size: 12px; cursor: pointer;
             &:hover{
@@ -209,7 +221,7 @@ const SearchBar = styled(HeadBoxStyle)`
         }
         button{ border-radius: 0px; }
       }
-      .bar-cart{ text-align: right; padding-top: 10px;}
+      .bar-cart{ text-align: right; padding-top: 40px;}
     }
 `
 /*導航欄樣式*/
@@ -265,8 +277,7 @@ const NavigationBar = (propsData)=>{
   const type = props.dataType;
   console.log('propsData:',propsData, props);
   const navArray = [
-    { txt: "首頁~HOME", route: "" },
-    { txt: "我的工作台", route: "" },
+    { txt: "首頁", route: "home" },
     { txt: "電影區", route: "movie" },
     { txt: "音樂廳", route: "music" },
     { txt: "旅行社", route: "" },
@@ -274,6 +285,7 @@ const NavigationBar = (propsData)=>{
     { txt: "資訊速遞", route: "" },
     { txt: "企業服務", route: "" },
     { txt: "新聞中心", route: "news" },
+    { txt: "關於我們", route: "about" },
   ];
   return(
     <NavBar>
@@ -285,7 +297,7 @@ const NavigationBar = (propsData)=>{
                   {
                     navArray.map((v,i)=>{
                       return(
-                        <NavCell onClick={(e) =>parent.onChange(e, v.route)}>
+                        <NavCell class={ i === props.activeBar ? "active" : "" } onClick={(e) =>parent.onChange(e, i, v.route)}>
                           {v.txt}
                         </NavCell>
                       )
@@ -298,16 +310,16 @@ const NavigationBar = (propsData)=>{
   )
 }
 
-class Circle{
-  constructor(radius){
-    this.radius = radius;
-  }
-  render(){
-    return(
-      <div>caonima</div>
-    )
-  }
-}
+// class Circle{
+//   constructor(radius){
+//     this.radius = radius;
+//   }
+//   render(){
+//     return(
+//       <div>caonima</div>
+//     )
+//   }
+// }
 
 //Test
 const ItemComponent = (propsData) => {
@@ -343,8 +355,10 @@ export default {
     },
     data() {
         return {
+
             searchKey: "",
             activeIndex: '1',
+            activeBar: "",
             brandList: []
         }
     },
@@ -390,7 +404,7 @@ export default {
         },
         //登录
         singInCustomer(e){
-
+           this.$router.push({ path: '/login', query: { key: ""} });
         },
         //立即购买
         nowbuyCustomer(product, e) {
@@ -417,11 +431,12 @@ export default {
           this.$router.push({ path: "/personal_center", query: { key: "" } })
         },
         //導航跳轉
-        onChange(e,route){
-          console.log(e,route);
+        onChange(e,i,route){
+          console.log(e,i,route);
+          this.$set(this.$data, "activeBar", i);
           this.$router.push({
             name: route,
-            params: { key: "1" },
+            // params: { key: "1" },
           })
         }
     },

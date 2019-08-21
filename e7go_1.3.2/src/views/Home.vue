@@ -1,3 +1,4 @@
+<style></style>
 <template>
   <div class="home">
     <div v-if="false">

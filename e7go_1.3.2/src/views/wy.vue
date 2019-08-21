@@ -1,6 +1,6 @@
 <template>
   <H>
-      <TopNav></TopNav>
+      <TopNav class="top-nav"></TopNav>
       <TabNav>
             <a>要闻</a>
             <a>推荐</a>
@@ -17,8 +17,114 @@
                 </div>
                 <div class="news-content">
                     <article class="news-item">
-                        <p>习近平会见莫桑比克总统纽西</p>
-                        <p>新华网 57分钟前 0跟帖</p>
+                        <div class="news-info">
+                          <p class="news-name">原创时政微视频 | 初心不改 矢志不渝</p>
+                          <p class="news-time">新华网 57分钟前 0跟帖</p>
+                        </div>
+                        <!-- <div class="news-pic"></div> -->
+                    </article>
+                    <article class="news-item">
+                        <div class="news-info">
+                          <p class="news-name">原创时政微视频 | 初心不改 矢志不渝</p>
+                          <p class="news-time">新华网 57分钟前 0跟帖</p>
+                        </div>
+                        <!-- <div class="news-pic"></div> -->
+                    </article>
+                    <article class="news-item">
+                        <div class="news-info">
+                          <p class="news-name">原创时政微视频 | 初心不改 矢志不渝</p>
+                          <p class="news-time">新华网 57分钟前 0跟帖</p>
+                        </div>
+                        <div class="news-pic">
+                          <img src="https://cms-bucket.ws.126.net/2019/07/01/9b70fe97b0064c6aa3d230a9c7edf27d.png?imageView&thumbnail=234y146&quality=45&interlace=1&enlarge=1&type=webp" />
+                        </div>
+                    </article>
+                    <article class="news-item">
+                        <div class="news-info">
+                          <p class="news-name">原创时政微视频 | 初心不改 矢志不渝</p>
+                          <p class="news-time">新华网 57分钟前 0跟帖</p>
+                        </div>
+                        <!-- <div class="news-pic"></div> -->
+                    </article>
+                    <article class="news-item">
+                        <div class="news-info">
+                          <p class="news-name">原创时政微视频 | 初心不改 矢志不渝</p>
+                          <p class="news-time">新华网 57分钟前 0跟帖</p>
+                        </div>
+                        <!-- <div class="news-pic"></div> -->
+                    </article>
+                    <article class="news-item">
+                        <div class="news-info">
+                          <p class="news-name">原创时政微视频 | 初心不改 矢志不渝</p>
+                          <p class="news-time">新华网 57分钟前 0跟帖</p>
+                        </div>
+                        <div class="news-pic">
+                          <img src="https://cms-bucket.ws.126.net/2019/07/01/9b70fe97b0064c6aa3d230a9c7edf27d.png?imageView&thumbnail=234y146&quality=45&interlace=1&enlarge=1&type=webp" />
+                        </div>
+                    </article>
+                    <div class="news-action">
+                      <a class="news-change">換一換</a>
+                      <a class="news-join">進入傻傻頻道</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="news-type">
+                <div class="news-title">
+                    <h2 class="title-txt">今日要闻</h2>
+                    <h2 class="title-tips">
+                      <a>賽事</a>
+                      <a>NBA</a>
+                      <a>中超</a>
+                      <a>CBA</a>
+                    </h2>
+                </div>
+                <div class="news-content">
+                    <article class="news-item">
+                        <div class="news-info">
+                          <p class="news-name">原创时政微视频 | 初心不改 矢志不渝</p>
+                          <p class="news-time">新华网 57分钟前 0跟帖</p>
+                        </div>
+                        <!-- <div class="news-pic"></div> -->
+                    </article>
+                    <article class="news-item">
+                        <div class="news-info">
+                          <p class="news-name">原创时政微视频 | 初心不改 矢志不渝</p>
+                          <p class="news-time">新华网 57分钟前 0跟帖</p>
+                        </div>
+                        <!-- <div class="news-pic"></div> -->
+                    </article>
+                    <article class="news-item">
+                        <div class="news-info">
+                          <p class="news-name">原创时政微视频 | 初心不改 矢志不渝</p>
+                          <p class="news-time">新华网 57分钟前 0跟帖</p>
+                        </div>
+                        <div class="news-pic">
+                          <img src="https://cms-bucket.ws.126.net/2019/07/01/9b70fe97b0064c6aa3d230a9c7edf27d.png?imageView&thumbnail=234y146&quality=45&interlace=1&enlarge=1&type=webp" />
+                        </div>
+                    </article>
+                    <article class="news-item">
+                        <div class="news-info">
+                          <p class="news-name">原创时政微视频 | 初心不改 矢志不渝</p>
+                          <p class="news-time">新华网 57分钟前 0跟帖</p>
+                        </div>
+                        <!-- <div class="news-pic"></div> -->
+                    </article>
+                    <article class="news-item">
+                        <div class="news-info">
+                          <p class="news-name">原创时政微视频 | 初心不改 矢志不渝</p>
+                          <p class="news-time">新华网 57分钟前 0跟帖</p>
+                        </div>
+                        <!-- <div class="news-pic"></div> -->
+                    </article>
+                    <article class="news-item">
+                        <div class="news-info">
+                          <p class="news-name">原创时政微视频 | 初心不改 矢志不渝</p>
+                          <p class="news-time">新华网 57分钟前 0跟帖</p>
+                        </div>
+                        <div class="news-pic">
+                          <img src="https://cms-bucket.ws.126.net/2019/07/01/9b70fe97b0064c6aa3d230a9c7edf27d.png?imageView&thumbnail=234y146&quality=45&interlace=1&enlarge=1&type=webp" />
+                        </div>
                     </article>
                 </div>
             </section>
@@ -27,7 +133,9 @@
   </H>
 </template>
 <style lang="less" scoped="true">
-
+  // .top-nav{
+  //   width: 375px;
+  // }
 </style>
 <script type="text/javascript">
 /***********************************************************/
@@ -43,11 +151,11 @@ const H = styled.div`
     overflow: hidden;
 `
 const TopNav = styled.nav`
-    // min-width: .8rem;
+width: 10rem;
     height: 3rem;
     background: url(https://static.ws.126.net/163/wap/f2e/milk_index/logo-site.png) no-repeat 50%;
-    -webkit-background-size: 12%;
-    background-size: 12%;
+    -webkit-background-size: 3.08rem;
+    background-size: 3.08rem;
     font-size: 0;
     color: #fff;
     background-color: #ee1a1a;
@@ -85,14 +193,74 @@ const CategoryNav = styled.div`
 const CategoryBox = styled.div`
     .news-type{
         .news-title{
-            height: 1.6rem;
-            line-height: 1.6rem;
-            padding: 0.6rem 0;
+            position: relative;
+            // height: 1.6rem;
+            line-height: 2.8rem;
+            padding: 0.6rem 1.22rem 0rem;
             -webkit-box-pack: justify;
             .title-txt{
-                font-size: 1.1rem;
-                font-weight: bold;
+              font-size: 1.4rem;
+              font-weight: bold;
+              // line-height: 3rem;
             }
+            .title-tips{
+              position: absolute;
+              right: 4%;
+              top: 20%;
+              a{ padding: 0.3rem 0.2rem; }
+            }
+        }
+        .news-content{
+          .news-item{
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: stretch;
+            flex-direction: row;
+            align-content: stretch;
+            align-items: center;
+            padding: 1.24rem 1.22rem;
+            border-bottom: 1px solid #f5f7f9;
+            margin: 0 -.22rem;
+            .news-info{
+              flex-basis: auto;
+              flex-grow: 1;
+              flex-shrink: 1;
+              .news-name{
+                line-height: 2rem;
+                font-size: 1.25rem;
+              }
+              .news-time{
+                line-height: 1rem;
+                margin-top: 0.2rem;
+                font-size: .85rem;
+                color: #b4b4b4;
+              }
+            }
+            .news-pic{
+              width: 8rem;
+              -webkit-box-flex: 0;
+              -webkit-flex: 0 0 auto;
+              -ms-flex: 0 0 auto;
+              flex: 0 0 auto;
+              img{
+                display: block;
+                height: 4.8rem;
+                margin: 0 auto;
+              }
+            }
+          }
+          .news-action{
+            color: red;
+            text-align: center;
+            .news-change{
+              display: inline-block;
+              width: 50%;
+            }
+            .news-join{
+              display: inline-block;
+              width: 50%;
+            }
+          }
         }
     }
 `

@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <router-link to="/">Home</router-link>
-    <router-link to="/about">About</router-link>
+    <!-- <router-link to="/">Home</router-link>
+    <router-link to="/about">About</router-link> -->
     <router-view></router-view>
-    <SiteFooter></SiteFooter>
+    <!-- <SiteFooter></SiteFooter> -->
   </div>
 </template>
 
@@ -27,7 +27,6 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
   }
-      
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
   a, abbr, acronym, address, big, cite, code,
@@ -37,8 +36,8 @@ export default {
   dl, dt, dd, ol, ul, li,
   fieldset, form, label, legend,
   table, caption, tbody, tfoot, thead, tr, th, td,
-  article, aside, canvas, details, embed, 
-  figure, figcaption, footer, header, hgroup, 
+  article, aside, canvas, details, embed,
+  figure, figcaption, footer, header, hgroup,
   menu, nav, output, ruby, section, summary,
   time, mark, audio, video {
     margin: 0;
@@ -52,7 +51,7 @@ export default {
     text-decoration: none;
   }
   /* HTML5 display-role reset for older browsers */
-  article, aside, details, figcaption, figure, 
+  article, aside, details, figcaption, figure,
   footer, header, hgroup, menu, nav, section {
     display: block;
   }

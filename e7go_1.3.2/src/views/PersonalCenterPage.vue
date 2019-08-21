@@ -1,5 +1,6 @@
 <template>
   <PersonalCenterGrid>
+        <SiteHeader isType="PersonalCenter"></SiteHeader>
         <div class="pc-inner">
             <aside class="pc-menu">
                 <dl>
@@ -27,18 +28,19 @@
 </style>
 <script type="text/javascript">
 /***********************************************************/
- 
+
 import styled from 'vue-styled-components';
 import { commonStyle, styleFn } from '@/assets/js/stylebase'
+import SiteHeader from '@/components/ssi/SiteHeader.vue'
 
 
 /***********************************************************/
 const  PersonalCenterGrid = styled.div`
-    width: 1200px;
-    margin: auto;
     position: relative;
     overflow: hidden;
     .pc-inner{
+        width: 1200px;
+        margin: auto;
         ${styleFn.flexbox};
         align-items: flex-start;
         .pc-menu{
@@ -47,7 +49,7 @@ const  PersonalCenterGrid = styled.div`
             dl{
                 line-height: 22px;
                 dt{ font-size: 16px; padding: 20px 0px 8px; cursor: pointer; }
-                dd{ 
+                dd{
                     font-size: 14px;
                     .pc-cell{
                         cursor: pointer;
@@ -55,7 +57,7 @@ const  PersonalCenterGrid = styled.div`
                         &:hover{ color: red; }
                     }
                 }
-                
+
             }
         }
         .pc-container{
@@ -65,13 +67,14 @@ const  PersonalCenterGrid = styled.div`
 `
 /***********************************************************/
 export default {
-    components: {   
+    components: {
+      SiteHeader,
       PersonalCenterGrid,
     },
     name: "",
     data() {
         return {
-            brandList: [] 
+            brandList: []
         }
     },
     computed: {},
@@ -94,7 +97,7 @@ export default {
     created() {
 
         this.$nextTick(()=>{
-            
+
         })
         /*this.$microtask(()=>{
             console.log("caonima")

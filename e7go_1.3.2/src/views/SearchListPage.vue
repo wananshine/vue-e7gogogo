@@ -1,11 +1,12 @@
 <template>
     <SearchGrid>
+        <SiteHeader isType="SearchList"></SiteHeader>
         <FilterBox>
             <ul class="filter-list">
                 <li data-name="分类" class="filter-row">
                     <div class="filter-title">分类</div>
                     <div class="filter-right">
-                        <div class="filter-category" :style="">
+                        <div class="filter-category">
                             <a>侦探/悬疑/推理</a>
                         </div>
                         <div class="filter-more" data-name="分类" @click="moreCustomer($event)">更多</div>
@@ -51,7 +52,7 @@
                             <a>家居家纺</a>
                             <a>玩具童车</a>
                         </div>
-                        <div class="filter-more">更多</div>
+                        <div class="filter-more" @click="moreCustomer($event)">更多</div>
                     </div>
                 </li>
                 <li data-name="出版社" class="filter-row">
@@ -120,36 +121,41 @@
             <LoadingShow></LoadingShow>
         </SearchResult>
         <ItemComponent :vvv="vvv" :uuu="uuu" ></ItemComponent>
-        <div @click="paginationCustomer($event)">分页</div>
+        <div @click="paginationCustomer($event)">分页 </div>
     </SearchGrid>
 </template>
 <style lang="less" scoped="true">
 </style>
 <script type="text/javascript">
 /***********************************************************/
- 
+
+import { mapState } from 'vuex'
 import styled from 'vue-styled-components';
 import JsonData from '@/assets/json/cartBuy.json'
 import { postJSON, getJSON } from '@/api/api1'
-import { livingList, DBlol, indexVideo, musicRankingsDetails } from '@/api/api2'
+import { livingList, DBlol, indexVideo, musicRankingsDetails, zhyqTest } from '@/api/api2'
 import LoadingShow from '@/components/ssi/LoadingShow'
+import SiteHeader from '@/components/ssi/SiteHeader.vue'
+
 
 /***********************************************************/
 const SearchGrid = styled.div`
-    width: 1200px;
-    margin: auto;
+    width: 100%;
     position: relative;
     overflow: hidden;
 `
 const FilterBox = styled.aside`
+    width: 1200px;
+    margin: auto;
     .filter-list{
         .filter-row{
             position: relative;
             overflow: hidden;
             font-size: 12px;
             border-bottom: 1px dotted #eeeceb;
+            background-color: #fef8f5;
             .filter-title{
-                width: 71px;
+                width: 72px;
                 // height: 18px;
                 // line-height: 18px;
                 float: left;
@@ -162,12 +168,15 @@ const FilterBox = styled.aside`
             }
             .filter-right{
                 position: relative;
-                width: 1126px;
+                width: 1128px;
+                height: 30px;
                 float: left;
+                background-color: #fff;
                 .filter-category{
                     position: relative;
                     padding: 0px 120px 0px 35px;
                     box-sizing: border-box;
+                    background-color: #fff;
                     a{
                         width: 110px;
                         height: 28px;
@@ -184,15 +193,22 @@ const FilterBox = styled.aside`
                     position: absolute;
                     right: 0px;
                     top: 12px;
+                    cursor: pointer;
+                    &:hover{
+                      color: red;
+                      text-decoration: underline;
+                    }
                 }
             }
-            
+
         }
     }
 `
 const SearchResult = styled.section`
     position: relative;
     overflow: hidden;
+    width: 1200px;
+    margin: auto;
     min-height: 500px;
 `
 const SearchItem = (propsData)=>{
@@ -223,7 +239,8 @@ const ItemComponent = (propsData) => {
 
 /***********************************************************/
 export default {
-    components: {   
+    components: {
+        SiteHeader,
         LoadingShow,
         SearchGrid,
         FilterBox,
@@ -244,7 +261,7 @@ export default {
                 {name: "栗子"},
                 {name: "苹果"}
             ],
-            recommendBook: JsonData.DangDangRecommendBook.returnval.items
+            recommendBook: [],//JsonData.DangDangRecommendBook.returnval.items
         }
     },
     watch: {
@@ -289,7 +306,8 @@ export default {
             // console.log(product, e)
         },
         moreCustomer(e){
-            console.log(e.target.getAttribute("data-name"), e.currentTarget.getAttribute("data-name"))
+            e.target.parentNode.style.height = "auto"
+            console.log(e, e.target, e.currentTarget, e.target.parentNode)
         },
         paginationCustomer(e){
             this.$store.dispatch("isLoadShow", true);
@@ -299,7 +317,7 @@ export default {
                     // this.$store.commit("IS_LOAD_SHOW", false);
                     this.$set(this.$data, "getNews", JSON.parse(res).data)
                     this.$store.dispatch("isLoadShow", false);
-                    console.log("新闻信息:",JSON.parse(res), this.$store.getters)        
+                    console.log("新闻信息:",JSON.parse(res), this.$store.getters)
                 }).catch(err=>{
                     console.log(err)
                 })
@@ -309,6 +327,23 @@ export default {
         this.$store.dispatch("isLoadShow", true);
     },
     created() {
+
+      console.log("e331",this)
+      console.log("e332",this.$axios.get('http://10.130.202.170:8080/search/test'))
+      new Promise(()=>{
+        this.$axios.get('http://10.130.202.170:8080/search/test').then((res)=>{
+          console.log(res)
+        }).catch(err=>{
+          console.log(err)
+        })
+      })
+
+        zhyqTest().then((res)=>{
+          console.log(res)
+        }).catch((err)=>{
+          console.log(err)
+        })
+
         DBlol().then((response)=>{
             console.log(response)
         }).catch((err)=>{
@@ -337,58 +372,58 @@ export default {
         // 财经类 - BA8EE5GMwangning
         // 军事类 - BAI67OGGwangning
         // 军情 - DE0CGUSJwangning
-        getJSON('https://3g.163.com/touch/reconstruct/article/list/BA10TA81wangning/0-10.html', {})
-            .then(res=>{
-                console.log("网易新闻:",JSON.parse(res))
-            }).catch(err=>{
-                console.log(err)
-            })
-
-        //豆瓣电影API
-        getJSON('http://api.douban.com/v2/movie/top250?start=25&count=25', {})
-            .then(res=>{
-                console.log("豆瓣电影:",JSON.parse(res))
-            }).catch(err=>{
-                console.log(err)
-            })
-
-        //省市区(县)街道四级联动：
-        getJSON('http://api.wangshuwen.com/getRegion', {})
-            .then(res=>{
-                console.log("省市区(县)街道四级联动:",JSON.parse(res))
-            }).catch(err=>{
-                console.log(err)
-            })
-        
-        //根据ip地址获取位置信息：
-        getJSON('http://api.wangshuwen.com/ip2Location', {})
-            .then(res=>{
-                console.log("位置信息:",JSON.parse(res))
-            }).catch(err=>{
-                console.log(err)
-            })
-
-        
-        //根据百度搜索引擎获取美女图片信息
-        getJSON('http://api.wangshuwen.com/getBeautyImages', {})
-            .then(res=>{
-                console.log("图片信息:",JSON.parse(res))
-            }).catch(err=>{
-                console.log(err)
-            })
-
-        //获取新闻信息
-        getJSON('http://api.wangshuwen.com/getNews', {})
-            .then(res=>{
-                // this.$store.commit("IS_SHOW", false);
-                // this.$set(this.$data, "getNews", JSON.parse(res).data)
-                // this.$store.dispatch("isLoadShow", false);
-                console.log("新闻信息:",JSON.parse(res), this.$store.getters)        
-            }).catch(err=>{
-                console.log(err)
-            })
-
-        //获取正在热映的电影
+        // getJSON('https://3g.163.com/touch/reconstruct/article/list/BA10TA81wangning/0-10.html', {})
+        //     .then(res=>{
+        //         console.log("网易新闻:",JSON.parse(res))
+        //     }).catch(err=>{
+        //         console.log(err)
+        //     })
+        //
+        // //豆瓣电影API
+        // getJSON('http://api.douban.com/v2/movie/top250?start=25&count=25', {})
+        //     .then(res=>{
+        //         console.log("豆瓣电影:",JSON.parse(res))
+        //     }).catch(err=>{
+        //         console.log(err)
+        //     })
+        //
+        // //省市区(县)街道四级联动：
+        // getJSON('http://api.wangshuwen.com/getRegion', {})
+        //     .then(res=>{
+        //         console.log("省市区(县)街道四级联动:",JSON.parse(res))
+        //     }).catch(err=>{
+        //         console.log(err)
+        //     })
+        //
+        // //根据ip地址获取位置信息：
+        // getJSON('http://api.wangshuwen.com/ip2Location', {})
+        //     .then(res=>{
+        //         console.log("位置信息:",JSON.parse(res))
+        //     }).catch(err=>{
+        //         console.log(err)
+        //     })
+        //
+        //
+        // //根据百度搜索引擎获取美女图片信息
+        // getJSON('http://api.wangshuwen.com/getBeautyImages', {})
+        //     .then(res=>{
+        //         console.log("图片信息:",JSON.parse(res))
+        //     }).catch(err=>{
+        //         console.log(err)
+        //     })
+        //
+        // //获取新闻信息
+        // getJSON('http://api.wangshuwen.com/getNews', {})
+        //     .then(res=>{
+        //         // this.$store.commit("IS_SHOW", false);
+        //         // this.$set(this.$data, "getNews", JSON.parse(res).data)
+        //         // this.$store.dispatch("isLoadShow", false);
+        //         console.log("新闻信息:",JSON.parse(res), this.$store.getters)
+        //     }).catch(err=>{
+        //         console.log(err)
+        //     })
+        //
+        // //获取正在热映的电影
         getJSON('http://api.wangshuwen.com/getHotMovie', {})
             .then(res=>{
                 this.$set(this.$data, "getNews", JSON.parse(res).data.subjects)
@@ -397,22 +432,22 @@ export default {
             }).catch(err=>{
                 console.log(err)
             })
+        //
+        // //获取电影top250
+        // getJSON('http://api.wangshuwen.com/getTopMovie', {})
+        //     .then(res=>{
+        //         console.log("电影top250:",JSON.parse(res))
+        //     }).catch(err=>{
+        //         console.log(err)
+        //     })
+        //
+        // getJSON('../api/v1/live/lol', {})
+        //     .then(res=>{
+        //         console.log(JSON.parse(res))
+        //     }).catch(err=>{
+        //         console.log(err)
+        //     })
 
-        //获取电影top250
-        getJSON('http://api.wangshuwen.com/getTopMovie', {})
-            .then(res=>{
-                console.log("电影top250:",JSON.parse(res))
-            }).catch(err=>{
-                console.log(err)
-            })
-
-        getJSON('../api/v1/live/lol', {})
-            .then(res=>{
-                console.log(JSON.parse(res))
-            }).catch(err=>{
-                console.log(err)
-            })
-        
     },
     beforeMount() {},
     mounted() {

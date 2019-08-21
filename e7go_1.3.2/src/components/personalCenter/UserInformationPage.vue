@@ -28,14 +28,14 @@
                     <input class="form-input" type="text" />
                 </div>
             </IdentityInfo>
-        </div>  
+        </div>
     </InformationGrid>
 </template>
 <style lang="less" scoped="true">
 </style>
 <script type="text/javascript">
 /***********************************************************/
- 
+
 import styled from 'vue-styled-components';
 
 
@@ -69,7 +69,7 @@ const AvatarInfo = styled.div`
         overflow: hidden;
         background: yellow;
         margin: auto;
-        border-radius: 50px; 
+        border-radius: 50px;
         img{ width: 100%; display: inline-block; }
     }
     .avatar-set{
@@ -90,12 +90,20 @@ const IdentityInfo = styled.div`
             width: 90px;
             display: inline-block;
         }
-        .form-input{}
+        .form-input{
+          color: #333;
+          outline: none;
+          height: 28px;
+          padding: 5px;
+          border-radius: 3px;
+          box-sizing: border-box;
+          border: 1px solid #ccc;
+        }
     }
 `
 /***********************************************************/
 export default {
-    components: {   
+    components: {
       InformationGrid,
       AvatarInfo,
       IdentityInfo
@@ -128,7 +136,7 @@ export default {
     created() {
 
         this.$nextTick(()=>{
-            
+
         })
         /*this.$microtask(()=>{
             console.log("caonima")
@@ -151,7 +159,7 @@ export default {
         },
         //设置多张头像
         setMultipleAvatarCustomer(e) {
-            //const filesArray = [...e.srcElement.files];  
+            //const filesArray = [...e.srcElement.files];
             // const filesArray = Array.from(e.srcElement.files);
             const filesArray = Array.prototype.slice.call(e.srcElement.files)
             console.log(filesArray, this.$refs.multipleUploadAvatar.value, this.$refs.multipleUploadAvatar.files);
@@ -170,7 +178,7 @@ export default {
             console.log(this.$refs.singleUploadAvatar.multiple);
             const multiple = e.currentTarget.multiple;
             switch(multiple){
-                case true: 
+                case true:
                     this.setMultipleAvatarCustomer(e)
                 break;
                 case false:

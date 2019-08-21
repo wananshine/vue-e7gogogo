@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-// Vue.use(axios)
-Vue.prototype.axios = axios
-Vue.use(VueAxios)
+// import axios from '@/axios'
+// import VueAxios from 'vue-axios'
+// // Vue.use(axios)
+// Vue.prototype.axios = axios
+// Vue.use(VueAxios)
 
 Vue.use(Vuex)
 
@@ -25,13 +25,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    token: "",
+    token: "",   //登录token
     testData: null,
     isLogin: null,
     isLoadShow: false,
+    counts: 888888,
+    amount: 999999,
   },
   getters: {
-    isLogin(state) { 
+    isLogin(state) {
       if(state.token){
         return state.isLogin = 1
       }else{
@@ -41,52 +43,66 @@ export default new Vuex.Store({
     isLoadShow(state) {
       return state.isLoadShow
     },
-    ddd(state) { 
-      this.axios.get("https://3g.163.com/touch/reconstruct/article/list/BD2A9LEIwangning/0-20.html")
-        .then((res) => { 
-          console.log("res", res);
-          state.testData = res;
-          return state.testData
-        })
-        .catch((err) => { 
-          console.log("err", err);
-          return "error"
-        })
-    }
+    ddd(state) {
+      console.log("this.axios:", this, this)
+     }
   },
-  //mutations使用commit触发
+  //mutations使用commit触发   this.$store.commit('SIGNIN', true);
   mutations: {
+    //注册
     SIGNIN(state, data) {
 
     },
-    SIGNUP(state, data) { 
+    //登录
+    SIGNUP(state, data) {
 
     },
-    SIGNOUT(state, data) { 
+    //登出
+    SIGNOUT(state, data) {
 
     },
-    IS_LOAD_SHOW(state, data) { 
+    //loading加载显示
+    IS_LOAD_SHOW(state, data) {
       state.isLoadShow = data;
-      console.log("IS_LOAD_SHOW:", state, data);
     },
+    //数量减少
+    MINUS_ACTION(state, data){
+      state.amount-- ;
+    },
+    //数量添加
+    PLUS_ACTION(state, data){
+      state.amount++ ;
+    },
+    //数量输入
+    AMOUNT_ACTION(state, data){
+      Object.assign(state, { amount: data });
+    }
   },
-  //actions使用dispatch触发
+  //actions使用dispatch触发   this.$store.dispatch('signIn',false)
   actions: {
     //登录
     signIn(context) {
       context.commit('SIGNIN');
     },
     //注册
-    signUp(context) { 
+    signUp(context) {
       context.commit('SIGNUP');
     },
     //登出
-    signOut(context) { 
+    signOut(context) {
       context.commit('SIGNOUT');
     },
+    //loading加载显示
     isLoadShow(context, args) {
-      console.log("isLoadShow:", args)
       context.commit('IS_LOAD_SHOW', args);
-    }, 
+    },
+    //减少数量
+    minusAction(context, args){
+      context.commit('MINUS_ACTION')
+    },
+    //增加数量
+    plusAction(context, args){
+      context.commit('PLUS_ACTION')
+    }
   }
 })

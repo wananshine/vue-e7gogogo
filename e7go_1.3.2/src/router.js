@@ -20,6 +20,20 @@ const routes = [
       }
     },
     {
+      path: '/home',
+      name: 'home',
+      meta: { title: '系统首页' },
+      component: Home,
+      beforeEnter: (to, from, next) => {
+        console.log("我即将进入系统首页");
+        next();
+      },
+      beforeLeave: (to, from, next) => {
+        console.log("我即将離開系统首页");
+        next();
+      }
+    },
+    {
       path: '/about',
       name: 'about',
       meta: { title: '關於我們' },
@@ -36,6 +50,12 @@ const routes = [
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './views/ProductsDetailsPage.vue')
+    },
+    {
+      path:'/confirm_order',
+      name: 'confirm_order',
+      meta: { title: '訂單確認' },
+      component: () => import(/* webpackChunkName: "about" */ '@/views/ConfirmOrderPage.vue'),
     },
     {
       path: '/search_product',
@@ -123,6 +143,15 @@ const routes = [
       component: () => import(/* webpackChunkName: "about" */ './views/NewsPage.vue')
     },
     {
+      path: '/login',
+      name: 'login',
+      meta: { title: '登录' },
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './views/Login.vue')
+    },
+    {
       path: '/wy',
       name: 'wy',
       meta: { title: '网易新闻' },
@@ -131,6 +160,15 @@ const routes = [
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './views/wy.vue')
     },
+    {
+      path: '*',
+      name: '404',
+      meta: { title: '页面走丢了' },
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './views/404.vue')
+    }
 ]
 const router = new Router({
     mode: "history",
@@ -148,6 +186,9 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
+  if(to.meta.title) {
+    document.title = to.meta.title;    //在路由里面写入的meta里面的title字段
+  };
   if (to.matched.some(r => r.meta.requireAuth)) {  //判断是否需要登录权限
       if (store.state.token) {  //判断是否登录
           console.log(store.state)
@@ -166,6 +207,9 @@ router.beforeEach((to, from, next) => {
   else {
     next();
   }
+})
+router.afterEach((to, from) => {
+  // ...
 })
 
 export default router;

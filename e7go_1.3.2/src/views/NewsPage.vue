@@ -1,16 +1,20 @@
-<template>
-  <NewsGrid>
-      news
-  </NewsGrid>
-</template>
 <style lang="less" scoped="true">
 </style>
+<template>
+  <NewsGrid>
+    <SiteHeader isType="news"></SiteHeader>
+    news
+  </NewsGrid>
+</template>
 <script type="text/javascript">
+
+
 /***********************************************************/
 
 import styled from 'vue-styled-components';
 import { postJSON, getJSON } from '@/api/api1'
 import { journalismApi } from '@/api/api2'
+import SiteHeader from '@/components/ssi/SiteHeader.vue'
 
 /***********************************************************/
 const NewsGrid = styled.div`
@@ -22,6 +26,7 @@ const NewsGrid = styled.div`
 /***********************************************************/
 export default {
     components: {
+      SiteHeader,
       NewsGrid,
     },
     name: "",

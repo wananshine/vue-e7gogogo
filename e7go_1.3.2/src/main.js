@@ -5,11 +5,14 @@ import store from './store'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueCookies from 'vue-cookies'
-// Vue.use(axios)
+import 'lib-flexible'
+import 'lib-flexible/flexible.js'
 
-Vue.use(VueAxios)
+
 Vue.use(VueCookies)
-Vue.prototype.$axios = axios
+Vue.use(VueAxios, axios)
+Vue.prototype.$axios = axios;
+
 import './registerServiceWorker'
 import './plugins/element.js'
 import 'swiper/dist/css/swiper.css'

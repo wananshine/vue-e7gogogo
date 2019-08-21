@@ -1,13 +1,13 @@
 <template>
   <H>
-      
+
   </H>
 </template>
 <style lang="less" scoped="true">
 </style>
 <script type="text/javascript">
 /***********************************************************/
- 
+
 import styled from 'vue-styled-components';
 
 
@@ -20,13 +20,13 @@ const H = styled.div`
 `
 /***********************************************************/
 export default {
-    components: {   
+    components: {
       H,
     },
     name: "",
     data() {
         return {
-            brandList: [] 
+            brandList: []
         }
     },
     computed: {},
@@ -49,7 +49,7 @@ export default {
     created() {
 
         this.$nextTick(()=>{
-            
+
         })
         /*this.$microtask(()=>{
             console.log("caonima")

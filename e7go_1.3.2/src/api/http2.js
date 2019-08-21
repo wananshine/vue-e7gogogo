@@ -1,11 +1,12 @@
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import store from '../store'                                                                                                           
+import store from '@/store'
 import Vue from 'vue';
 import router from '../router'
+
 // Vue.use(axios)
-Vue.prototype.$axios = axios
-Vue.use(VueAxios)
+// Vue.prototype.$axios = axios
+// Vue.use(VueAxios, axios)
 
 //axios 配置
 axios.defaults.timeout = 5000;
@@ -22,7 +23,8 @@ axios.interceptors.request.use(
     config => {
         if (store.state.token) { // 判断是否存在token，如果存在的话，则每个http header都加上token
             config.headers.Authorization = `token ${store.state.token}`;
-            console.log('headers:',store.state.token)
+            console.log('headers:',store.state.token);
+            console.log("&&&&&&&&&&&&&&&&&&&&&:", this, this.axios)
         }
         return config;
     },
@@ -38,7 +40,6 @@ axios.interceptors.response.use(
         return response;
     },
     error => {
-        console.log('axios response 拦截器 error:',error)
         if (error.response) {
             switch (error.response.status) {
                 case 401:
@@ -111,6 +112,7 @@ axios.interceptors.response.use(
 
                 default:
                     alert('degault');
+                    console.log('axios response 拦截器 error:',error)
                     break;
             }
         }
@@ -118,28 +120,50 @@ axios.interceptors.response.use(
     }
 );
 
+/**
+ * 封装get方法
+ * @param url
+ * @param data
+ * @returns {Promise}
+**/
 export const fetch = (url, params = {}) => {
     return new Promise((resolve, reject) => {
         axios.get(url, {
                 params: params
             })
             .then(response => {
-                resolve(response.data)
+                resolve(response)
             })
             .catch(err => {
                 reject(err)
             })
     })
 }
+export const get = (url, params = {}) => {
+    return axios.get(url, {
+            params: params
+        })
+        .then(response => {
+          return response
+        })
+        .catch(err => {
+            return err
+        })
+}
 
-
+/**
+ * 封装post方法
+ * @param url
+ * @param data
+ * @returns {Promise}
+**/
 export const post = (url, params = {}) => {
     return new Promise((resolve, reject) => {
         axios.post(url, {
                 params: params
             })
             .then(response => {
-                resolve(response.data)
+                resolve(responsew)
             })
             .catch(err => {
                 reject(err)
@@ -147,7 +171,12 @@ export const post = (url, params = {}) => {
     })
 }
 
-
+/**
+ * 封装patch方法
+ * @param url
+ * @param data
+ * @returns {Promise}
+**/
 export const patch = (url, params = {}) => {
     return new Promise((resolve, reject) => {
         axios.patch(url, {
@@ -162,7 +191,12 @@ export const patch = (url, params = {}) => {
     })
 }
 
-
+/**
+ * 封装put方法
+ * @param url
+ * @param data
+ * @returns {Promise}
+**/
 export const put = (url, params = {}) => {
     return new Promise((resolve, reject) => {
         axios.put(url, {
