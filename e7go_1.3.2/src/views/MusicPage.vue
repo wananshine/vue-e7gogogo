@@ -4,6 +4,14 @@
     <SiteHeader isType="music"></SiteHeader>
     <MusicWrap>
       <div>
+        <div>
+            <el-input v-model='test.val'></el-input>
+            {{test.num}}
+        </div>
+        <div>
+            <el-input v-model='test1.val'></el-input>
+            {{test1.num}}
+        </div>
         <MusicRank v-for="(r, ridx) in rankList" :key="ridx">
             <dt style="color: red;">{{r.name}}</dt>
             <dd>
@@ -57,6 +65,14 @@ export default {
     name: "",
     data() {
         return {
+            test: {
+                val: 789,
+                num: 123
+            },
+            test1: {
+                val: null,
+                num: null
+            },
             rankList: []
         }
     },
@@ -77,6 +93,9 @@ export default {
         }
     },
     beforeCreate() {
+        
+    },
+    created() {
         musicRankings().then((response)=>{
             if(response.code === 200){
                 this.$set(this.$data, "rankList", response.result)
@@ -85,12 +104,10 @@ export default {
         }).catch((error)=>{
             console.log(error)
         })
-    },
-    created() {
-
 
         this.$nextTick(()=>{
-
+            const that = this;
+            this.test1 = Object.create(that.test)
         })
         /*this.$microtask(()=>{
             console.log("caonima")

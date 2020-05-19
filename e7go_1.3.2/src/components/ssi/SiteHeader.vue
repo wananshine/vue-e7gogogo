@@ -340,7 +340,6 @@ export default {
         NavList,
         NavCell,
         SiteCategoryItem,
-        Circle
     },
     name: "",
     props: {
